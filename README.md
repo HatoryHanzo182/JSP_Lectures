@@ -1,6 +1,6 @@
 # Lectures on JSP
 
-This repository is a continuation of the [JavaLectures repository](https://github.com/HatoryHanzo182/JavaLectures) and was created for the purpose of training within the STEP Academy. Teacher: Denis Skamenkov (denisskam).
+This repository is a continuation of the [JavaLectures repository](https://github.com/HatoryHanzo182/JavaLectures) and was created for the purpose of training within the STEP Academy. Teacher: https://github.com/denniksam.
 
 ## Description
 
