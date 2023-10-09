@@ -17,9 +17,9 @@
     <div class="nav-wrapper light-blue">
         <a href="<%=context%>" class="brand-logo right">Java</a>
         <ul id="nav-mobile">
-            <li><a href="sass.html">Sass</a></li>
-            <li><a href="badges.html">Components</a></li>
-            <li><a href="collapsible.html">JavaScript</a></li>
+            <li><a href="index.jsp">JSP</a></li>
+            <li <%= "filters.jsp".equals(page_body) ? "class='active'" : ""%>><a href="<%=context%>/filters">Filters</a></li>
+            <li <%= "ioc.jsp".equals(page_body) ? "class='active'" : ""%>><a href="<%=context%>/ioc">Ioc</a></li>
         </ul>
     </div>
 </nav>
