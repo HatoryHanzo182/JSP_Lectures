@@ -2,27 +2,22 @@
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
   <filter>
-    <filter-name>CharswtFilter</filter-name>
-    <filter-class>step.learning.filters.CharsetFilter</filter-class>
+    <filter-name>IocFilter</filter-name>
+    <filter-class>com.google.inject.servlet.GuiceFilter</filter-class>
   </filter>
   <filter-mapping>
-    <filter-name>CharswtFilter</filter-name>
+    <filter-name>IocFilter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
+  <listener>
+    <listener-class>step.learning.ioc.IocContextListener</listener-class>
+  </listener>
   <servlet>
     <servlet-name>HomeServlet</servlet-name>
     <servlet-class>step.learning.servlets.HomeServlet</servlet-class>
   </servlet>
-<!--  <servlet>-->
-<!--    <servlet-name>FiltersServlet</servlet-name>-->
-<!--    <servlet-class>step.learning.servlets.FiltersServlet</servlet-class>-->
-<!--  </servlet>-->
   <servlet-mapping>
     <servlet-name>HomeServlet</servlet-name>
     <url-pattern/>
   </servlet-mapping>
-<!--  <servlet-mapping>-->
-<!--    <servlet-name>FiltersServlet</servlet-name>-->
-<!--    <url-pattern>/filters</url-pattern>-->
-<!--  </servlet-mapping>-->
 </web-app>
