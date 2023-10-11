@@ -10,12 +10,15 @@
     <!--Import Google Icon Font-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"/>
+    <link rel="stylesheet" href="<%=context%>/css/site.css"/>
 </head>
 <body>
 <nav>
     <div class="nav-wrapper light-blue">
-        <a href="<%=context%>" class="brand-logo right">Java</a>
+        <!-- Modal Trigger -->
+        <a class="auth-trigger modal-trigger right" href="#auth-modal"><i class="material-icons">door_front</i></a>
+        <a href="<%=context%>" class="site-logo right">Java</a>
         <ul id="nav-mobile">
             <li <%= "abut.jsp".equals(page_body) ? "class='active'" : ""%>><a href="<%=context%>/jsp">JSP</a></li>
             <li <%= "filters.jsp".equals(page_body) ? "class='active'" : ""%>><a href="<%=context%>/filters">Filters</a></li>
@@ -24,8 +27,20 @@
     </div>
 </nav>
 <jsp:include page="<%=page_body%>"/>
+<!-- Modal Structure -->
+<div id="auth-modal" class="modal">
+    <div class="modal-content">
+        <h4>Authentication</h4>
+        <p>A bunch of text</p>
+    </div>
+    <div class="modal-footer">
+        <a href="<%=context%>/signup" class="modal-close light-blue btn-flat lighten-2">Sign up</a>
+        <a href="#!" class="modal-close waves-effect waves-green light-blue btn-flat">Sign in</a>
+    </div>
+</div>
 <!-- Compiled and minified JavaScript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script src="<%=context%>/js/site.js"></script>
 </body>
 <footer class="page-footer light-blue">
     <div class="container">

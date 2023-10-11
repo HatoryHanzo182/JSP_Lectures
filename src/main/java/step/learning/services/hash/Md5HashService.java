@@ -1,4 +1,4 @@
-package step.learning.IOC.Services.Hash;
+package step.learning.services.hash;
 
 import com.google.inject.Singleton;
 

@@ -1,4 +1,4 @@
-package step.learning.IOC.Services.Random;
+package step.learning.services.random;
 
 import java.util.Random;
 
