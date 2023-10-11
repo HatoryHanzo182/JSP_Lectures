@@ -22,8 +22,9 @@ public class RandomServiceV1 implements IRandomServices
 
         for (int i = 0; i < char_length; i++)
         {
-            //int index = _random.nextInt(0, _HEX_CHARS.length);
-            //sb.append(_HEX_CHARS[index]);
+            int index = _random.nextInt(_HEX_CHARS.length);
+
+            sb.append(_HEX_CHARS[index]);
         }
         return sb.toString();
     }
