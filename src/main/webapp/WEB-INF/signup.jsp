@@ -1,59 +1,70 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="step.learning.dto.models.SignupFormModel" %>
+<%@ page import="java.util.Map" %>
+<%@ page import="java.util.HashMap" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <%
-    String reg_data = (String) request.getAttribute("reg-data");
+    String reg_data = (String) request.getAttribute( "reg-data" ) ;
 
-    if(reg_data == null)
-        reg_data = "";
+    if( reg_data == null )
+        reg_data = "" ;
+
+    SignupFormModel form_model = (SignupFormModel) request.getAttribute( "reg-model" ) ;
+
+    Map<String, String> validation_errors = form_model == null ? new HashMap<String, String>() : form_model.GetValidationErrorMessage();
 %>
 <h2>Sign up</h2>
-<p><%=reg_data%></p>
+<p>
+    <% if( validation_errors.containsKey("login") )
+    { %>Есть ошибка проверки логина:<b><%= validation_errors.get("login") %></b> <%}%>
+</p>
 <div class="row">
     <form class="col s12" action="" method="post">
         <div class="row">
             <div class="input-field col s6">
-                <i class="material-icons prefix">account_circle</i>
+                <i class="material-icons prefix">person</i>
                 <input id="reg-login" name="reg-login" type="text" class="validate" value="UserLogin">
                 <label for="reg-login">Login</label>
             </div>
             <div class="input-field col s6">
-                <i class="material-icons prefix">phone</i>
-                <input id="reg-name" name="reg-login" type="text" class="validate" value="UserName">
+                <i class="material-icons prefix">badge</i>
+                <input id="reg-name" name="reg-name" type="text" class="validate" value="UserName">
                 <label for="reg-name">User name</label>
             </div>
         </div>
         <div class="row">
             <div class="input-field col s6">
-                <i class="material-icons prefix">account_circle</i>
+                <i class="material-icons prefix">alternate_email</i>
                 <input id="reg-email" name="reg-email" type="text" class="validate" value="user@gmail.com">
                 <label for="reg-email">Email</label>
             </div>
             <div class="input-field col s6">
-                <i class="material-icons prefix">phone</i>
-                <input id="reg-birthday" name="reg-email" type="date" class="validate">
-                <label for="reg-birthday">Birthday</label>
+                <i class="material-icons prefix">child_friendly</i>
+                <input id="reg-birthdate" name="reg-birthdate" type="date" class="validate">
+                <label for="reg-birthdate">Birthday</label>
             </div>
         </div>
         <div class="row">
             <div class="input-field col s6">
-                <i class="material-icons prefix">account_circle</i>
-                <input id="reg-password" name="reg-password" type="text" class="validate" value="123">
+                <i class="material-icons prefix">lock</i>
+                <input id="reg-password" name="reg-password" type="password" class="validate" value="123">
                 <label for="reg-password">Password</label>
             </div>
             <div class="input-field col s6">
-                <i class="material-icons prefix">phone</i>
-                <input id="reg-repeat" name="reg-password" type="text" class="validate" value="123">
+                <i class="material-icons prefix">lock_open</i>
+                <input id="reg-repeat" name="reg-repeat" type="password" class="validate" value="123">
                 <label for="reg-repeat">Repeat password</label>
             </div>
         </div>
         <div class="row">
             <div class="input-field col s6">
+                <i class="material-icons prefix">fact_check</i>
                 <label>
-                    <input type="checkbox" class="filled-in"/>
+                    <input name="reg-agree" type="checkbox" class="filled-in"/>
                     <span>I won't break anything</span>
                 </label>
             </div>
             <div class="input-field col s6 right-align">
-                <button class="waves-effect waves-light btn">
+                <button class="waves-effect light-blue btn">
                     <i class="material-icons left">cloud</i>Sign up
                 </button>
             </div>
