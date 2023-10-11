@@ -51,6 +51,19 @@ public class SignupFormModel
 
         if(_login == null || _login.isEmpty())
             result.put("login", "Login cannot be empty!");
+        if (_name == null || _name.isEmpty())
+            result.put("name", "Name cannot be empty!");
+        if (_email == null || _email.isEmpty())
+            result.put("email", "Email cannot be empty!");
+        if (_password == null || _password.isEmpty())
+            result.put("password", "Password cannot be empty!");
+        if (_password_repeat == null || !_password_repeat.equals(_password))
+            result.put("password_repeat", "Passwords do not match!");
+        if (_birthdate == null)
+            result.put("birthdate", "Birthdate is required!");
+        if (_is_agree == null || !_is_agree)
+            result.put("agree", "You must agree to the terms!");
+
         return result;
     }
 

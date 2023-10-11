@@ -1,6 +1,8 @@
 package step.learning.servlets;
+
 import com.google.inject.Singleton;
 import step.learning.dto.models.SignupFormModel;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -8,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.Map;
 
 @Singleton
 public class SignupServlet extends HttpServlet
@@ -42,8 +45,15 @@ public class SignupServlet extends HttpServlet
         {
             form_model = new SignupFormModel(req);
 
-            session.setAttribute("reg-status", 2);
-            session.setAttribute("reg-data", form_model);
+            Map<String, String> validation_errors = form_model.GetValidationErrorMessage();
+
+            if (validation_errors.isEmpty()) { }
+            else
+            {
+                session.setAttribute("reg-status", 2);
+                session.setAttribute("reg-model", form_model);
+                session.setAttribute("validation-errors", validation_errors);
+            }
         }
         catch (ParseException ex) { session.setAttribute("reg-status", 1); }
 

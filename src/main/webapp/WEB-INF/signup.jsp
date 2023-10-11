@@ -14,8 +14,27 @@
 %>
 <h2>Sign up</h2>
 <p>
-    <% if( validation_errors.containsKey("login") )
-    { %>Есть ошибка проверки логина:<b><%= validation_errors.get("login") %></b> <%}%>
+    <% if (validation_errors.containsKey("login")) { %>
+    Есть ошибка проверки логина: <b><%= validation_errors.get("login") %></b> /
+    <% } %>
+    <% if (validation_errors.containsKey("name")) { %>
+    Есть ошибка проверки имени: <b><%= validation_errors.get("name") %></b> /
+    <% } %>
+    <% if (validation_errors.containsKey("email")) { %>
+    Есть ошибка проверки email: <b><%= validation_errors.get("email") %></b> /
+    <% } %>
+    <% if (validation_errors.containsKey("password")) { %>
+    Есть ошибка проверки пароля: <b><%= validation_errors.get("password") %></b> /
+    <% } %>
+    <% if (validation_errors.containsKey("password_repeat")) { %>
+    Есть ошибка проверки повтора пароля: <b><%= validation_errors.get("password_repeat") %></b> /
+    <% } %>
+    <% if (validation_errors.containsKey("birthdate")) { %>
+    Есть ошибка проверки даты рождения: <b><%= validation_errors.get("birthdate") %></b> /
+    <% } %>
+    <% if (validation_errors.containsKey("agree")) { %>
+    Вы должны согласиться с условиями: <b><%= validation_errors.get("agree") %></b> /
+    <% } %>
 </p>
 <div class="row">
     <form class="col s12" action="" method="post">
