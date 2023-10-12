@@ -1,6 +1,8 @@
 package step.learning.filters;
 
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import step.learning.services.culture.IResourceProvider;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +14,14 @@ import java.util.regex.Pattern;
 public class CultureFilter  implements Filter
 {
     private FilterConfig _filter_config;
+
+    private final IResourceProvider resource_provider;
+
+    @Inject
+    public CultureFilter(IResourceProvider resourceProvider)
+    {
+        resource_provider = resourceProvider;
+    }
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException
@@ -27,10 +37,13 @@ public class CultureFilter  implements Filter
         String uri = req.getServletPath() ;
         Matcher matcher = Pattern.compile("^/(\\w\\w)/(.*)$").matcher(uri);
 
+        String culture = "uk";
+
         if( matcher.matches() )
-            req.setAttribute( "culture", matcher.group( 1 ) ) ;
-        else
-            req.setAttribute( "culture", "uk" ) ;
+            culture = matcher.group( 1 );
+
+        req.setAttribute( "culture", culture );
+        resource_provider.SetCulture(culture);
 
         filterChain.doFilter(servletRequest, servletResponse);
     }

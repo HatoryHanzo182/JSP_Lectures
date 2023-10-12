@@ -6,7 +6,8 @@
     String reg_data = (String) request.getAttribute( "reg-data" ) ;
 
     SignupFormModel form_model = (SignupFormModel) request.getAttribute( "reg-model" ) ;
-    Map<String, String> validation_errors = form_model == null ? new HashMap<String, String>() : form_model.GetValidationErrorMessage();
+    Map<String, String> validation_errors = request.getAttribute( "validation_errors" ) == null
+            ? new HashMap<String, String>() : (Map<String, String>) request.getAttribute( "validation_errors" ) ;
     String login_class = reg_data == null ? "validate" : (validation_errors.containsKey("login") ? "invalid" : "valid");
 %>
 <h2>Sign up</h2>
@@ -33,7 +34,7 @@
     <% } %>
 </p>
 <div class="row">
-    <form class="col s12" action="" method="post">
+    <form class="col s12" action="" method="post" enctype="multipart/form-data">
         <div class="row">
             <div class="input-field col s6">
                 <i class="material-icons prefix">person</i>
@@ -81,11 +82,20 @@
                     <span>I won't break anything</span>
                 </label>
             </div>
-            <div class="input-field col s6 right-align">
-                <button class="waves-effect light-blue btn">
-                    <i class="material-icons left">cloud</i>Sign up
-                </button>
+            <div class="file-field input-field">
+                <div class="btn">
+                    <span class="material-symbols-outlined">image</span>
+                    <input type="file" name="reg-avatar">
+                </div>
+                <div class="file-path-wrapper">
+                    <input class="file-path validate" type="text" placeholder="Avatar">
+                </div>
             </div>
+        </div>
+        <div class="input-field col s6 right-align">
+            <button class="waves-effect light-blue btn">
+                <i class="material-icons left">cloud</i>Sign up
+            </button>
         </div>
     </form>
 </div>

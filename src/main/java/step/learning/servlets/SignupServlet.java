@@ -1,7 +1,9 @@
 package step.learning.servlets;
 
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import step.learning.dto.models.SignupFormModel;
+import step.learning.services.culture.IResourceProvider;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -10,11 +12,20 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.HashMap;
 import java.util.Map;
 
 @Singleton
 public class SignupServlet extends HttpServlet
 {
+    private final IResourceProvider _resource_provider;
+
+    @Inject
+    public SignupServlet(IResourceProvider resource_provider)
+    {
+        _resource_provider = resource_provider;
+    }
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
     {
@@ -28,7 +39,26 @@ public class SignupServlet extends HttpServlet
             req.setAttribute("reg-data", reg_status.toString());
 
             if(reg_status == 2)
+            {
+                SignupFormModel form_model = (SignupFormModel) session.getAttribute( "reg-model" ) ;
+
                 req.setAttribute("reg-model", session.getAttribute("reg-model"));
+
+                Map<String, String> validation_errors = form_model == null ? new HashMap<String, String>() : form_model.GetValidationErrorMessage();
+
+                for (String key : validation_errors.keySet())
+                {
+                    String translation = _resource_provider.GetString(validation_errors.get(key));
+                    if (translation != null)
+                    {
+                        validation_errors.put(key, translation);
+
+                    }
+
+                }
+
+                req.setAttribute("validation_errors", validation_errors);
+            }
         }
 
         req.setAttribute("page-body", "signup.jsp");

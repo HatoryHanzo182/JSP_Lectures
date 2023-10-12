@@ -1,5 +1,8 @@
 package step.learning.dto.models;
 
+import org.apache.commons.fileupload.FileItem;
+import step.learning.services.formparse.IFormParsResult;
+
 import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -18,6 +21,7 @@ public class SignupFormModel
     private String _email;
     private Date _birthdate;
     private Boolean _is_agree;
+    private String _avatar;
 
     public SignupFormModel(HttpServletRequest request) throws ParseException
     {
@@ -28,6 +32,24 @@ public class SignupFormModel
         this.SetEmail(request.getParameter("reg-email"));
         this.SetBirthdate(request.getParameter("reg-birthdate"));
         this.SetAgree(request.getParameter("reg-agree"));
+    }
+
+    public SignupFormModel(IFormParsResult form_parse_result) throws ParseException
+    {
+        Map<String, String> fields = form_parse_result.GetFields();
+
+        this.SetLogin(fields.get("reg-login"));
+        this.SetName(fields.get("reg-name"));
+        this.SetPassword(fields.get("reg-password"));
+        this.SetPasswordRepeat(fields.get("reg-repeat"));
+        this.SetEmail(fields.get("reg-email"));
+        this.SetBirthdate(fields.get("reg-birthdate"));
+        this.SetAgree(fields.get("reg-agree"));
+
+        Map<String, FileItem> files = form_parse_result.GetFiles();
+
+        if (files.containsKey("reg-avatars"))
+            this.SetAvatar(files.get("reg-avatar"));
     }
 
     public void SetLogin(String login) { this._login = login; }
@@ -46,16 +68,24 @@ public class SignupFormModel
     public Date GetBirthdate() { return _birthdate; }
     public Boolean GetIsAgree() { return _is_agree; }
 
+    public String GetAvatar() {
+        return _avatar;
+    }
+
+    public void SetAvatar(String _avatar) {
+        this._avatar = _avatar;
+    }
+
     public Map<String, String> GetValidationErrorMessage()
     {
         Map<String, String> result = new HashMap<>();
 
         if(_login == null || _login.isEmpty())
-            result.put("login", "Login cannot be empty!");
+            result.put("login", "signup_login_empty");
         else if(_login.length() < 2)
-            result.put("login", "Short login!");
+            result.put("login", "signup_login_too_short");
         else if(!Pattern.matches("^[a-zA-Z0-9]+$", _login))
-            result.put("login", "Unallowed characters!");
+            result.put("login", "signup_login_pattern_mismatch");
 
 
         if (_name == null || _name.isEmpty())
@@ -85,5 +115,10 @@ public class SignupFormModel
     public void SetAgree(String input)
     {
         this.SetIsAgree("on".equalsIgnoreCase(input) || "true".equalsIgnoreCase(input));
+    }
+
+    public void SetAvatar(FileItem file_item)
+    {
+
     }
 }
