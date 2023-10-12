@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 public class SignupFormModel
 {
@@ -51,6 +52,12 @@ public class SignupFormModel
 
         if(_login == null || _login.isEmpty())
             result.put("login", "Login cannot be empty!");
+        else if(_login.length() < 2)
+            result.put("login", "Short login!");
+        else if(!Pattern.matches("^[a-zA-Z0-9]+$", _login))
+            result.put("login", "Unallowed characters!");
+
+
         if (_name == null || _name.isEmpty())
             result.put("name", "Name cannot be empty!");
         if (_email == null || _email.isEmpty())

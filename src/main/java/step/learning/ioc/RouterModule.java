@@ -2,6 +2,7 @@ package step.learning.ioc;
 
 import com.google.inject.servlet.ServletModule;
 import step.learning.filters.CharsetFilter;
+import step.learning.filters.CultureFilter;
 import step.learning.servlets.*;
 
 public class RouterModule extends ServletModule
@@ -10,10 +11,12 @@ public class RouterModule extends ServletModule
     protected void configureServlets()
     {
         filter("/*").through(CharsetFilter.class);
+        filter("/*").through(CultureFilter.class);
         serve("/").with(HomeServlet.class);
         serve("/jsp").with(AboutServlet.class);
         serve("/filters").with(FiltersServlet.class);
         serve("/ioc").with(IocServlet.class);
         serve("/signup").with(SignupServlet.class);
+        serveRegex("/\\w\\w/signup").with(SignupServlet.class);
     }
 }

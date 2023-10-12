@@ -10,6 +10,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7c9d6bd6-e772-4b96-b4b4-0ad7718f73ea" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/step/learning/filters/CultureFilter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../.gitattributes" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../.gitignore" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../JS/СlassApplication/Webpack/node_modules/caniuse-lite/LICENSE" beforeDir="false" />
@@ -9298,7 +9299,7 @@
       <change beforePath="$PROJECT_DIR$/../../JS/СlassApplication/Webpack/webpack.config.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/step/learning/dto/models/SignupFormModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/step/learning/dto/models/SignupFormModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/step/learning/servlets/SignupServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/step/learning/servlets/SignupServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/step/learning/ioc/RouterModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/step/learning/ioc/RouterModule.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/signup.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/signup.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Python/PythonGallows/.vs/PythonGallows/FileContentIndex/2bc0e6a0-798e-4ddc-bec0-2b646f132a62.vsidx" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Python/PythonGallows/.vs/PythonGallows/FileContentIndex/read.lock" beforeDir="false" />
@@ -9375,24 +9376,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "OverrideImplement.generate.javadoc": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/My resources/Work/Java/JavaWebLectures/src/main/java/step/learning/services",
-    "list.type.of.created.stylesheet": "CSS",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;OverrideImplement.generate.javadoc&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/My resources/Work/Java/JavaWebLectures/src/main/java/step/learning/services&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\My resources\Work\Java\JavaWebLectures\src\main\java\step\learning\services" />
@@ -9510,6 +9511,7 @@
       <workItem from="1696960987894" duration="390000" />
       <workItem from="1697016170567" duration="16393000" />
       <workItem from="1697035188236" duration="14058000" />
+      <workItem from="1697102261009" duration="5582000" />
     </task>
     <servers />
   </component>

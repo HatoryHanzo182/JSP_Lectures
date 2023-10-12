@@ -5,18 +5,14 @@
 <%
     String reg_data = (String) request.getAttribute( "reg-data" ) ;
 
-    if( reg_data == null )
-        reg_data = "" ;
-
     SignupFormModel form_model = (SignupFormModel) request.getAttribute( "reg-model" ) ;
-
     Map<String, String> validation_errors = form_model == null ? new HashMap<String, String>() : form_model.GetValidationErrorMessage();
+    String login_class = reg_data == null ? "validate" : (validation_errors.containsKey("login") ? "invalid" : "valid");
 %>
 <h2>Sign up</h2>
 <p>
-    <% if (validation_errors.containsKey("login")) { %>
-    Есть ошибка проверки логина: <b><%= validation_errors.get("login") %></b> /
-    <% } %>
+    <%=request.getAttribute("culture")%>
+
     <% if (validation_errors.containsKey("name")) { %>
     Есть ошибка проверки имени: <b><%= validation_errors.get("name") %></b> /
     <% } %>
@@ -41,8 +37,11 @@
         <div class="row">
             <div class="input-field col s6">
                 <i class="material-icons prefix">person</i>
-                <input id="reg-login" name="reg-login" type="text" class="validate" value="UserLogin">
+                <input id="reg-login" name="reg-login" type="text" class="<%=login_class%>" value="<%=form_model == null ? "" : form_model.GetLogin()%>">
                 <label for="reg-login">Login</label>
+                <% if( validation_errors.containsKey("login") ) { %>
+                <span class="helper-text" data-error="<%= validation_errors.get("login") %>" ></span>
+                <% } %>
             </div>
             <div class="input-field col s6">
                 <i class="material-icons prefix">badge</i>
