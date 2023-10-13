@@ -5,7 +5,6 @@ import com.google.inject.Singleton;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
-
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.nio.charset.StandardCharsets;
@@ -39,9 +38,8 @@ public class MixedFormParsService implements IFormParsService
     {
         final Map<String, String> fields = new HashMap<>();
         final Map<String, FileItem> files = new HashMap<>();
-
-        boolean is_multipart = request.getHeader("Content-Type") != null
-                && request.getHeader("Content-Type").startsWith("multipart/form-data");
+        final HttpServletRequest req = request;
+        boolean is_multipart = request.getHeader("Content-Type") != null && request.getHeader("Content-Type").startsWith("multipart/form-data");
         String charset = (String) request.getAttribute("charset");
 
         if(charset == null)
@@ -52,38 +50,27 @@ public class MixedFormParsService implements IFormParsService
                 for (FileItem item : _file_upload.parseRequest(request))
                 {
                     if (item.isFormField())
-                    {
                         fields.put(item.getFieldName(), item.getString(charset));
-                    }
                     else
-                    {
                         files.put(item.getFieldName(), item);
-                    }
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
             }
+            catch (Exception e) { e.printStackTrace(); }
         }
         else
         {
-            for (Map.Entry<String, String[]> entry : request.getParameterMap().entrySet()) {
+            for (Map.Entry<String, String[]> entry : request.getParameterMap().entrySet())
                 fields.put(entry.getKey(), entry.getValue()[0]);
-            }
         }
 
         return new IFormParsResult()
         {
             @Override
-            public Map<String, String> GetFields()
-            {
-                return fields;
-            }
-
+            public Map<String, String> GetFields() { return fields; }
             @Override
-            public Map<String, FileItem> GetFiles()
-            {
-                return files;
-            }
+            public Map<String, FileItem> GetFiles() { return files; }
+            @Override
+            public HttpServletRequest GetRequest() { return req; }
         };
     }
 }

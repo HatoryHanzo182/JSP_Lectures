@@ -3,12 +3,10 @@ package step.learning.dto.models;
 import org.apache.commons.fileupload.FileItem;
 import step.learning.services.formparse.IFormParsResult;
 
-import javax.servlet.http.HttpServletRequest;
+import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.regex.Pattern;
 
 public class SignupFormModel
@@ -23,17 +21,6 @@ public class SignupFormModel
     private Boolean _is_agree;
     private String _avatar;
 
-    public SignupFormModel(HttpServletRequest request) throws ParseException
-    {
-        this.SetLogin(request.getParameter("reg-login"));
-        this.SetName(request.getParameter("reg-name"));
-        this.SetPassword(request.getParameter("reg-password"));
-        this.SetPasswordRepeat(request.getParameter("reg-repeat"));
-        this.SetEmail(request.getParameter("reg-email"));
-        this.SetBirthdate(request.getParameter("reg-birthdate"));
-        this.SetAgree(request.getParameter("reg-agree"));
-    }
-
     public SignupFormModel(IFormParsResult form_parse_result) throws ParseException
     {
         Map<String, String> fields = form_parse_result.GetFields();
@@ -45,11 +32,7 @@ public class SignupFormModel
         this.SetEmail(fields.get("reg-email"));
         this.SetBirthdate(fields.get("reg-birthdate"));
         this.SetAgree(fields.get("reg-agree"));
-
-        Map<String, FileItem> files = form_parse_result.GetFiles();
-
-        if (files.containsKey("reg-avatars"))
-            this.SetAvatar(files.get("reg-avatar"));
+        this.SetAvatar(form_parse_result);
     }
 
     public void SetLogin(String login) { this._login = login; }
@@ -59,6 +42,7 @@ public class SignupFormModel
     public void SetEmail(String email) { this._email = email; }
     public void SetBirthdate(Date birthdate) { this._birthdate = birthdate; }
     public void SetIsAgree(Boolean is_agree) { this._is_agree = is_agree; }
+    public void SetAvatar(String _avatar) { this._avatar = _avatar; }
 
     public String GetLogin() { return _login; }
     public String GetName() { return _name; }
@@ -67,14 +51,7 @@ public class SignupFormModel
     public String GetEmail() { return _email; }
     public Date GetBirthdate() { return _birthdate; }
     public Boolean GetIsAgree() { return _is_agree; }
-
-    public String GetAvatar() {
-        return _avatar;
-    }
-
-    public void SetAvatar(String _avatar) {
-        this._avatar = _avatar;
-    }
+    public String GetAvatar() { return _avatar; }
 
     public Map<String, String> GetValidationErrorMessage()
     {
@@ -86,7 +63,6 @@ public class SignupFormModel
             result.put("login", "signup_login_too_short");
         else if(!Pattern.matches("^[a-zA-Z0-9]+$", _login))
             result.put("login", "signup_login_pattern_mismatch");
-
 
         if (_name == null || _name.isEmpty())
             result.put("name", "Name cannot be empty!");
@@ -117,8 +93,38 @@ public class SignupFormModel
         this.SetIsAgree("on".equalsIgnoreCase(input) || "true".equalsIgnoreCase(input));
     }
 
-    public void SetAvatar(FileItem file_item)
+    public void SetAvatar(IFormParsResult form_parse_result)
     {
+        Map<String, FileItem> files = form_parse_result.GetFiles();
 
+        if (!files.containsKey("reg-avatar"))
+        {
+            this._avatar = null;
+            return;
+        }
+
+        FileItem file_item = files.get("reg-avatar");
+        String uploaded_filename = file_item.getName();
+        int dot_index = uploaded_filename.lastIndexOf('.');
+        String ext = uploaded_filename.substring(dot_index);
+        String[] extensions = {".jpg", ".jpeg", ".png", ".ico", ".gif"};
+
+        if(!Arrays.asList(extensions).contains(ext))
+            throw new RuntimeException("Invalid file extension");
+
+        String upload_DIR = form_parse_result.GetRequest().getServletContext().getRealPath("./upload/avatar/");
+        String saved_filename;
+        File saved_file;
+
+        do
+        {
+            saved_filename = UUID.randomUUID().toString().substring(0, 8) + ext;
+            saved_file = new File(upload_DIR, saved_filename);
+        } while(saved_file.exists());
+
+        try { file_item.write(saved_file); }
+        catch (Exception ex) { throw new RuntimeException(ex); }
+
+        this.SetAvatar(saved_filename);
     }
 }

@@ -4,6 +4,8 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import step.learning.dto.models.SignupFormModel;
 import step.learning.services.culture.IResourceProvider;
+import step.learning.services.formparse.IFormParsResult;
+import step.learning.services.formparse.IFormParsService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -19,18 +21,19 @@ import java.util.Map;
 public class SignupServlet extends HttpServlet
 {
     private final IResourceProvider _resource_provider;
+    private final IFormParsService _form_pars_service;
 
     @Inject
-    public SignupServlet(IResourceProvider resource_provider)
+    public SignupServlet(IResourceProvider resource_provider, IFormParsService formParsService)
     {
         _resource_provider = resource_provider;
+        _form_pars_service = formParsService;
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
     {
         HttpSession session = req.getSession();
-        //String reg_data = (String)session.getAttribute("reg-data");
         Integer reg_status = (Integer)session.getAttribute("reg-status") ;
 
         if(reg_status != null)
@@ -49,18 +52,13 @@ public class SignupServlet extends HttpServlet
                 for (String key : validation_errors.keySet())
                 {
                     String translation = _resource_provider.GetString(validation_errors.get(key));
+
                     if (translation != null)
-                    {
                         validation_errors.put(key, translation);
-
-                    }
-
                 }
-
                 req.setAttribute("validation_errors", validation_errors);
             }
         }
-
         req.setAttribute("page-body", "signup.jsp");
         req.getRequestDispatcher("/WEB-INF/_layout.jsp").forward(req, resp);
     }
@@ -73,7 +71,9 @@ public class SignupServlet extends HttpServlet
 
         try
         {
-            form_model = new SignupFormModel(req);
+            IFormParsResult form_pars_result = _form_pars_service.Parse(req);
+
+            form_model = new SignupFormModel(form_pars_result);
 
             Map<String, String> validation_errors = form_model.GetValidationErrorMessage();
 

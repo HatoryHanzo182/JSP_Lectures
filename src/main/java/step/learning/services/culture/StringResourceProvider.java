@@ -35,10 +35,7 @@ public class StringResourceProvider implements IResourceProvider
     }
 
     @Override
-    public String GetString(String name)
-    {
-        return GetString(name, _default_culture);
-    }
+    public String GetString(String name) { return GetString(name, _default_culture); }
 
     @Override
     public void SetCulture(String culture) { _default_culture = culture; }

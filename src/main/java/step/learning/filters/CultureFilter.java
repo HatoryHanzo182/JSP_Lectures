@@ -3,7 +3,6 @@ package step.learning.filters;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import step.learning.services.culture.IResourceProvider;
-
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;

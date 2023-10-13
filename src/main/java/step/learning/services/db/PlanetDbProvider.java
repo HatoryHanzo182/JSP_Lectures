@@ -1,2 +1,12 @@
-package step.learning.services.db;public class PlanetDbProvider {
+package step.learning.services.db;
+
+import java.sql.Connection;
+
+public class PlanetDbProvider implements IDbProvider
+{
+    @Override
+    public Connection GetConnection()
+    {
+        return null;
+    }
 }
