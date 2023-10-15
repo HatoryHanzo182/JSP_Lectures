@@ -6,7 +6,6 @@ import step.learning.dto.models.SignupFormModel;
 import step.learning.services.culture.IResourceProvider;
 import step.learning.services.formparse.IFormParsResult;
 import step.learning.services.formparse.IFormParsService;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;

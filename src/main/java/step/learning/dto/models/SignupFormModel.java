@@ -2,7 +2,6 @@ package step.learning.dto.models;
 
 import org.apache.commons.fileupload.FileItem;
 import step.learning.services.formparse.IFormParsResult;
-
 import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -63,7 +62,6 @@ public class SignupFormModel
             result.put("login", "signup_login_too_short");
         else if(!Pattern.matches("^[a-zA-Z0-9]+$", _login))
             result.put("login", "signup_login_pattern_mismatch");
-
         if (_name == null || _name.isEmpty())
             result.put("name", "Name cannot be empty!");
         if (_email == null || _email.isEmpty())

@@ -35,7 +35,6 @@ public class CultureFilter  implements Filter
         HttpServletRequest req = (HttpServletRequest) servletRequest;
         String uri = req.getServletPath() ;
         Matcher matcher = Pattern.compile("^/(\\w\\w)/(.*)$").matcher(uri);
-
         String culture = "uk";
 
         if( matcher.matches() )

@@ -1,7 +1,6 @@
 package step.learning.services.hash;
 
 import com.google.inject.Singleton;
-
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

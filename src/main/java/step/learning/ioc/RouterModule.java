@@ -12,13 +12,11 @@ public class RouterModule extends ServletModule
     {
         filter("/*").through(CharsetFilter.class);
         filter("/*").through(CultureFilter.class);
-
         serve("/").with(HomeServlet.class);
         serve("/jsp").with(AboutServlet.class);
         serve("/filters").with(FiltersServlet.class);
         serve("/ioc").with(IocServlet.class);
         serve("/signup").with(SignupServlet.class);
-
         serveRegex("/\\w\\w/").with(HomeServlet.class);
         serveRegex("/\\w\\w/filters").with(FiltersServlet.class);
         serveRegex("/\\w\\w/ioc").with(IocServlet.class);

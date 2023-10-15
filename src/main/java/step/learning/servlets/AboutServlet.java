@@ -1,7 +1,6 @@
 package step.learning.servlets;
 
 import com.google.inject.Singleton;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;

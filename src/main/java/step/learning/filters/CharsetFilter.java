@@ -1,9 +1,7 @@
 package step.learning.filters;
 
 import com.google.inject.Singleton;
-
 import javax.servlet.*;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -15,10 +13,7 @@ public class CharsetFilter implements Filter
     private FilterConfig _filter_config;
 
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException
-    {
-        _filter_config = filterConfig;
-    }
+    public void init(FilterConfig filterConfig) throws ServletException { _filter_config = filterConfig; }
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)

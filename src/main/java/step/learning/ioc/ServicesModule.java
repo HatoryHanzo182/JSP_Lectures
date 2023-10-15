@@ -31,6 +31,7 @@ public class ServicesModule extends AbstractModule
         if( random_service == null )
         {
             random_service = new RandomServiceV1() ;
+
             random_service.Seed( "initial" ) ;
         }
         return random_service ;
