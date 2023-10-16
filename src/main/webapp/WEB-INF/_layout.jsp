@@ -24,6 +24,7 @@
             <li <%= "abut.jsp".equals(page_body) ? "class='active'" : ""%>><a href="<%=context%>/jsp">JSP</a></li>
             <li <%= "filters.jsp".equals(page_body) ? "class='active'" : ""%>><a href="<%=context_culture%>/filters">Filters</a></li>
             <li <%= "ioc.jsp".equals(page_body) ? "class='active'" : ""%>><a href="<%=context_culture%>/ioc">Ioc</a></li>
+            <li <%= "db.jsp".equals(page_body) ? "class='active'" : ""%>><a href="<%=context_culture%>/db">DB</a></li>
         </ul>
     </div>
 </nav>

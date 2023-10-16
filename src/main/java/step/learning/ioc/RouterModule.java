@@ -21,5 +21,6 @@ public class RouterModule extends ServletModule
         serveRegex("/\\w\\w/filters").with(FiltersServlet.class);
         serveRegex("/\\w\\w/ioc").with(IocServlet.class);
         serveRegex("/\\w\\w/signup").with(SignupServlet.class);
+        serveRegex("/\\w\\w/db").with(DbServlet.class);
     }
 }
