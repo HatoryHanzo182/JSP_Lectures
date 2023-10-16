@@ -5,6 +5,8 @@ import com.google.inject.Provides;
 import com.google.inject.name.Names;
 import step.learning.services.culture.IResourceProvider;
 import step.learning.services.culture.StringResourceProvider;
+import step.learning.services.db.IDbProvider;
+import step.learning.services.db.PlanetDbProvider;
 import step.learning.services.formparse.IFormParsService;
 import step.learning.services.formparse.MixedFormParsService;
 import step.learning.services.hash.IHashService;
@@ -21,6 +23,8 @@ public class ServicesModule extends AbstractModule
         bind(IHashService.class).annotatedWith(Names.named("Signature-hash")).to(Sha1HashService.class);
         bind(IResourceProvider.class).to(StringResourceProvider.class);
         bind(IFormParsService.class).to(MixedFormParsService.class);
+        bind(IDbProvider.class).to(PlanetDbProvider.class);
+        bind(String.class).annotatedWith(Names.named("db-prefix")).toInstance("java_web");
     }
 
     private IRandomServices random_service ;

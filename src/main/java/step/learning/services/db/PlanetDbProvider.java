@@ -2,7 +2,6 @@ package step.learning.services.db;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 import java.io.IOException;
@@ -17,12 +16,6 @@ import java.util.Objects;
 public class PlanetDbProvider implements IDbProvider
 {
     private Connection _connection;
-
-    @Inject
-    public PlanetDbProvider(Connection connection)
-    {
-        _connection = connection;
-    }
 
     @Override
     public Connection GetConnection()

@@ -1,8 +1,10 @@
+<%@ page import="java.util.Date" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%
     String page_body = (String) request.getAttribute( "page-body" ) ;
     String context = request.getContextPath();
     String context_culture = context + "/" + request.getAttribute("culture");
+    long time = new Date().getTime();
 %>
 <!DOCTYPE html>
 <html>
@@ -12,7 +14,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"/>
-    <link rel="stylesheet" href="<%=context%>/css/site.css"/>
+    <link rel="stylesheet" href="<%=context%>/css/site.css?<%=time%>"/>
 </head>
 <body>
 <nav>
@@ -42,7 +44,7 @@
 </div>
 <!-- Compiled and minified JavaScript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-<script src="<%=context%>/js/site.js"></script>
+<script src="<%=context%>/js/site.js?<%=time%>"></script>
 </body>
 <footer class="page-footer light-blue">
     <div class="container">
