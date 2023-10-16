@@ -3,7 +3,6 @@ package step.learning.services.db;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.inject.Singleton;
-
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;

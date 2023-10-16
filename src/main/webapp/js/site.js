@@ -14,5 +14,11 @@ document.addEventListener('DOMContentLoaded', function()
 
 function CreateButtonClick()
 {
-    fetch(window.location.href, { method: 'POST' }).then(r => r.json()).then(j => {console.log(j)});
+    fetch(window.location.href, { method: 'POST' }).then(r => r.json()).then(response =>
+    {
+        if (response.status === "ok")
+            document.getElementById("message").innerHTML = "Создано успешно";
+        else
+            document.getElementById("message").innerHTML = "Ошибка: " + response.message;
+    });
 }

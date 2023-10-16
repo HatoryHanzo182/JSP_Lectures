@@ -5,7 +5,6 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.google.inject.name.Named;
 import step.learning.services.db.IDbProvider;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -27,7 +26,6 @@ public class DbServlet extends HttpServlet
         _db_prefix = db_prefix;
     }
 
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
     {
@@ -47,14 +45,27 @@ public class DbServlet extends HttpServlet
 
         try(Statement statement = _db_provider.GetConnection().createStatement())
         {
-            statement.executeUpdate(sql);
+            statement.execute(sql);
             result.addProperty("status", "ok");
             result.addProperty("message", "create ok");
         }
         catch (SQLException ex)
         {
+            if (ex.getSQLState().equals("42S01") && ex.getErrorCode() == 1050)
+            {
+                result.addProperty("status", "error");
+                result.addProperty("message", "Ошибка: Таблица уже существует");
+            }
+            else
+            {
+                result.addProperty("status", "error");
+                result.addProperty("message", "Произошла ошибка: " + ex.getMessage());
+            }
+        }
+        catch (Exception ex)
+        {
             result.addProperty("status", "error");
-            result.addProperty("message", ex.getMessage());
+            result.addProperty("message", "Произошла ошибка: " + ex.getMessage());
         }
         resp.getWriter().print(result);
     }
