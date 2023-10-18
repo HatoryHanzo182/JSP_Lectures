@@ -27,6 +27,26 @@
 <h2>ТЕСТ</h2>
 <div class="row">
     Создать таблицу БД.
-    <button id="db-create-button" class="waves-effect light-blue btn"><i class="material-icons right">cloud</i>button</button>
+    <button id="db-create-button" class="waves-effect light-blue btn"><i class="material-icons right">cloud</i>Create</button>
     <div id="message"></div>
+</div>
+<div class="row">
+    <form class="col s12">
+        <div class="row">
+            <div class="input-field col s4">
+                <i class="material-icons prefix">badge</i>
+                <input placeholder="Input your full name" id="db-call-me-name" type="text" class="validate">
+                <label for="db-call-me-name">Name</label>
+            </div>
+        </div>
+        <div class="input-field col s6">
+            <i class="material-icons prefix">call</i>
+            <input placeholder="+380 XX XXX XX XX" id="db-call-me-phone" type="tel" class="validate">
+            <label for="db-call-me-phone">Phone number</label>
+        </div>
+        <div class="row">
+            Создать таблицу БД.
+            <button type="button" id="db-call-me-button" class="waves-effect light-blue btn"><i class="material-icons right">cloud</i>Call me</button>
+        </div>
+    </form>
 </div>
