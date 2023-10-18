@@ -50,15 +50,14 @@ function CallmeButtonClick()
         return;
     }
 
-    fetch(window.location.href, {
-            method: 'PATCH',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({
-                name: name_input.value,
-                phone: phone_input.value,
-            })
-        }).then(r => r.json()).then(j =>
-    {
-        console.log(j);
-    });
+    fetch(window.location.href,
+        {
+                method: 'PATCH',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(
+                    {
+                            name: name_input.value,
+                            phone: phone_input.value,
+                    })
+        }).then(r => r.json()).then(j => { console.log(j);});
 }

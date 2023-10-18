@@ -1,12 +1,14 @@
 package step.learning.servlets;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.google.inject.name.Named;
+import step.learning.dao.CallMeDao;
+import step.learning.dto.entities.CallMe;
 import step.learning.services.db.IDbProvider;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -14,22 +16,22 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.regex.Pattern;
 
 @Singleton
 public class DbServlet extends HttpServlet
 {
     private final IDbProvider _db_provider;
     private final String _db_prefix;
+    private final CallMeDao _call_me_dao;
 
     @Inject
-    public DbServlet(IDbProvider db_provider, @Named("db-prefix") String db_prefix)
+    public DbServlet(IDbProvider db_provider, @Named("db-prefix") String db_prefix, CallMeDao call_me_dao)
     {
         _db_provider = db_provider;
         _db_prefix = db_prefix;
+        _call_me_dao = call_me_dao;
     }
 
     @Override
@@ -84,52 +86,26 @@ public class DbServlet extends HttpServlet
             return;
         }
 
-        String name;
-        String phone;
+        CallMe item;
 
-        try
-        {
-            name = reqest_body.get("name").getAsString();
-            phone = reqest_body.get("phone").getAsString();
-        }
-        catch(Exception ex)
+        try { item = new CallMe(reqest_body); }
+        catch (IllegalArgumentException ex)
         {
             resp.setStatus(422);
-            resp.getWriter().print("\"Unprocessable content: JSON object must hav non-null 'name' and 'phone'\"");
+            resp.getWriter().printf("\"Unprocessed content: %s\"", ex.getMessage());
             return;
         }
 
-        if (!Pattern.matches("^\\+380([\\s-]?\\d){9}$", phone))
-        {
-            resp.setStatus(422);
-            resp.getWriter().print("\"Unprocessable content: JSON object must match '+380XXXXXXXXXX'patern\"");
-            return;
-        }
-        phone = phone.replaceAll("[\\s-]+", "");
-
-        String sql = "INSERT INTO " + _db_prefix + "call_me (`name`, `phone`) VALUES(?,?)";
-
-        try(PreparedStatement prep = _db_provider.GetConnection().prepareStatement(sql))
-        {
-            prep.setString(1, name);
-            prep.setString(2, phone);
-            prep.execute();
-        }
-        catch (SQLException ex)
+        try { _call_me_dao.Add(item); }
+        catch (IllegalAccessException ex)
         {
             resp.setStatus(500);
             resp.getWriter().print("\"Internal Server Error: details in server logs\"");
-            System.err.println(ex.getMessage());
             return;
         }
 
-        JsonObject result = new JsonObject();
-
-        result.addProperty("name", name);
-        result.addProperty("phone", phone);
-        result.addProperty("status", "ok");
         resp.setStatus(201);
-        resp.getWriter().print(result);
+        resp.getWriter().print(new Gson().toJson(item));
     }
 
     @Override

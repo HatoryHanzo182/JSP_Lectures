@@ -45,7 +45,6 @@
             <label for="db-call-me-phone">Phone number</label>
         </div>
         <div class="row">
-            Создать таблицу БД.
             <button type="button" id="db-call-me-button" class="waves-effect light-blue btn"><i class="material-icons right">cloud</i>Call me</button>
         </div>
     </form>
