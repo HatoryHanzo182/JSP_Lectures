@@ -9,6 +9,7 @@ import com.google.inject.name.Named;
 import step.learning.dao.CallMeDao;
 import step.learning.dto.entities.CallMe;
 import step.learning.services.db.IDbProvider;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -16,8 +17,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
-import java.sql.SQLException;
-import java.sql.Statement;
 
 @Singleton
 public class DbServlet extends HttpServlet
@@ -118,39 +117,9 @@ public class DbServlet extends HttpServlet
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
     {
-        String sql = "CREATE TABLE " + _db_prefix + "call_me (" +
-                "id BIGINT PRIMARY KEY," +
-                "name VARCHAR(64) NULL," +
-                "phone CHAR(13) NOT NULL COMMENT '+380000000000'," +
-                "moment DATETIME DEFAULT CURRENT_TIMESTAMP," +
-                "call_moment DATETIME NULL" +
-                ") ENGINE = InnoDB DEFAULT CHARSET = UTF8";
-        JsonObject result = new JsonObject();
+        JsonObject result = _call_me_dao.Install();
 
-        try(Statement statement = _db_provider.GetConnection().createStatement())
-        {
-            statement.execute(sql);
-            result.addProperty("status", "ok");
-            result.addProperty("message", "create ok");
-        }
-        catch (SQLException ex)
-        {
-            if (ex.getSQLState().equals("42S01") && ex.getErrorCode() == 1050)
-            {
-                result.addProperty("status", "error");
-                result.addProperty("message", "Ошибка: Таблица уже существует");
-            }
-            else
-            {
-                result.addProperty("status", "error");
-                result.addProperty("message", "Произошла ошибка: " + ex.getMessage());
-            }
-        }
-        catch (Exception ex)
-        {
-            result.addProperty("status", "error");
-            result.addProperty("message", "Произошла ошибка: " + ex.getMessage());
-        }
-        resp.getWriter().print(result);
+        resp.setContentType("application/json");
+        resp.getWriter().print(result.toString());
     }
 }
