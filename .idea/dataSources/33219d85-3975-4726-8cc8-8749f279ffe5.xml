@@ -1102,8 +1102,8 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
     </schema>
     <schema id="279" parent="1" name="db_jsp">
       <Current>1</Current>
-      <IntrospectionTimestamp>2023-10-18.12:45:27</IntrospectionTimestamp>
-      <LocalIntrospectionTimestamp>2023-10-18.09:45:26</LocalIntrospectionTimestamp>
+      <IntrospectionTimestamp>2023-10-19.13:55:13</IntrospectionTimestamp>
+      <LocalIntrospectionTimestamp>2023-10-19.10:55:12</LocalIntrospectionTimestamp>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
     <user id="280" parent="1" name="vt_repl"/>

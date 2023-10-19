@@ -1,6 +1,7 @@
 package step.learning.servlets;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.inject.Inject;
@@ -47,6 +48,9 @@ public class DbServlet extends HttpServlet
             case "UNLINK":
                 doUnlink(req, resp);
                 break;
+            case "CALL":
+                doCall(req, resp);
+                break;
             default:
                 super.service(req, resp);
         }
@@ -54,7 +58,10 @@ public class DbServlet extends HttpServlet
 
     protected void doLink(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
     {
-        resp.getWriter().print("LINK works!");
+        Gson gson  = new GsonBuilder().serializeNulls().create();
+
+        resp.setContentType("application/json");
+        resp.getWriter().print(gson.toJson(_call_me_dao.GetAll()));
     }
 
     protected void doUnlink(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
@@ -105,6 +112,42 @@ public class DbServlet extends HttpServlet
 
         resp.setStatus(201);
         resp.getWriter().print(new Gson().toJson(item));
+    }
+
+    protected void doCall(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
+    {
+        resp.setContentType("application/json");
+        String call_id =  req.getParameter("call-id");
+
+        if(call_id == null)
+        {
+            resp.setStatus(400);
+            resp.getWriter().print("Missing required URL-parameter: 'call-id'");
+            return;
+        }
+
+        CallMe call_me = _call_me_dao.GetById(call_id);
+
+        if (call_me == null)
+        {
+            resp.setStatus(404);
+            resp.getWriter().print("Requested 'call-id' not found");
+            return;
+        }
+        if(call_me.GetCallMoment() != null)
+        {
+            resp.setStatus(422);
+            resp.getWriter().print("Unprocessable Content: requested 'call-id' already");
+            return;
+        }
+        if (_call_me_dao.SetCallMoment(call_me))
+            resp.getWriter().print(new Gson().toJson(call_me));
+        else
+        {
+            resp.setStatus(500);
+            resp.getWriter().print("\"Internal Server Error: details in server logs\"");
+            return;
+        }
     }
 
     @Override

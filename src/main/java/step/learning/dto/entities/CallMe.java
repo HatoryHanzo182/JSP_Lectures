@@ -1,6 +1,9 @@
 package step.learning.dto.entities;
 
 import com.google.gson.JsonObject;
+
+import java.sql.ResultSet;
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.regex.Pattern;
 
@@ -26,6 +29,23 @@ public class CallMe
         }
         catch (IllegalArgumentException ex) { throw ex; }
         catch(Exception ex) { throw new IllegalArgumentException("JSON object must hav non-null 'name' and 'phone'"); }
+    }
+
+    public CallMe(ResultSet result_set) throws IllegalArgumentException
+    {
+        try
+        {
+            SetId(result_set.getString("id"));
+            SetName(result_set.getString("name"));
+            SetPhone(result_set.getString("phone"));
+            SetMoment(new Date(result_set.getTimestamp("moment").getTime()));
+
+            Timestamp call_moment_timestamp = result_set.getTimestamp("call_moment");
+
+            if(call_moment_timestamp != null)
+                SetCallMoment(result_set.getDate("call_moment"));
+        }
+        catch (Exception ex) { throw new IllegalArgumentException(ex); }
     }
 
     public void SetId(String id) { this._id = id; }

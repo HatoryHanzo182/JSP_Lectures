@@ -21,27 +21,27 @@ public class PlanetDbProvider implements IDbProvider
     {
         JsonObject db_config = null;
 
-        if(_connection == null)
+        if (_connection == null)
         {
-            try(Reader reader = new InputStreamReader(Objects.requireNonNull(
+            try (Reader reader = new InputStreamReader(Objects.requireNonNull(
                     this.getClass().getClassLoader().getResourceAsStream("db_config.json"))))
             {
                 db_config = JsonParser.parseReader(reader).getAsJsonObject();
             }
-            catch (IOException ex) { throw  new RuntimeException(ex); }
+            catch (IOException ex) { throw new RuntimeException(ex); }
             catch (NullPointerException ex) { throw new RuntimeException("Resource not found"); }
+
+
+            try
+            {
+                JsonObject planet_config = db_config.get("DataProviders").getAsJsonObject().get("PlanetScale").getAsJsonObject();
+                DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
+
+                _connection = DriverManager.getConnection(planet_config.get("url").getAsString(),
+                        planet_config.get("user").getAsString(), planet_config.get("password").getAsString());
+            }
+            catch (SQLException ex) { throw new RuntimeException(ex); }
         }
-
-        try
-        {
-            JsonObject planet_config = db_config.get( "DataProviders" ).getAsJsonObject().get( "PlanetScale" ).getAsJsonObject();
-            DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
-
-            _connection = DriverManager.getConnection(planet_config.get("url").getAsString(),
-                    planet_config.get("user").getAsString(), planet_config.get("password").getAsString());
-        }
-        catch (SQLException ex) { throw new RuntimeException(ex); }
-
         return _connection;
     }
 }

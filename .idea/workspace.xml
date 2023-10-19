@@ -10,6 +10,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7c9d6bd6-e772-4b96-b4b4-0ad7718f73ea" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/step/learning/ioc/LoggingModule.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/logging.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../.gitattributes" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../.gitignore" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../JS/СlassApplication/Webpack/node_modules/caniuse-lite/LICENSE" beforeDir="false" />
@@ -9298,9 +9300,14 @@
       <change beforePath="$PROJECT_DIR$/../../JS/СlassApplication/Webpack/webpack.config.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/33219d85-3975-4726-8cc8-8749f279ffe5.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/33219d85-3975-4726-8cc8-8749f279ffe5.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/33219d85-3975-4726-8cc8-8749f279ffe5/storage_v2/_src_/schema/db_jsp.Bmk2sA.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/33219d85-3975-4726-8cc8-8749f279ffe5/storage_v2/_src_/schema/db_jsp.Bmk2sA.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/step/learning/dao/CallMeDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/step/learning/dao/CallMeDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/step/learning/dto/entities/CallMe.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/step/learning/dto/entities/CallMe.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/step/learning/ioc/IocContextListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/step/learning/ioc/IocContextListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/step/learning/services/db/PlanetDbProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/step/learning/services/db/PlanetDbProvider.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/step/learning/servlets/DbServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/step/learning/servlets/DbServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/db.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/db.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/js/site.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/js/site.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Python/PythonGallows/.vs/PythonGallows/FileContentIndex/2bc0e6a0-798e-4ddc-bec0-2b646f132a62.vsidx" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Python/PythonGallows/.vs/PythonGallows/FileContentIndex/read.lock" beforeDir="false" />
@@ -9411,6 +9418,7 @@
       <recent name="C:\My resources\Work\Java\JavaWebLectures\src\main\webapp\img" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\My resources\Work\Java\JavaWebLectures\src\main\resources" />
       <recent name="C:\My resources\Work\Java\JavaWebLectures\src\main" />
       <recent name="C:\My resources\Work\Java\JavaWebLectures\src\main\webapp\WEB-INF" />
     </key>
@@ -9531,6 +9539,9 @@
       <workItem from="1697474802429" duration="4291000" />
       <workItem from="1697620702856" duration="16027000" />
       <workItem from="1697644268332" duration="3147000" />
+      <workItem from="1697706519731" duration="349000" />
+      <workItem from="1697706977265" duration="4044000" />
+      <workItem from="1697711464847" duration="9475000" />
     </task>
     <servers />
   </component>

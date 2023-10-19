@@ -6,21 +6,27 @@ import com.google.inject.Singleton;
 import com.google.inject.name.Named;
 import step.learning.dto.entities.CallMe;
 import step.learning.services.db.IDbProvider;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Statement;
+
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @Singleton
 public class CallMeDao
 {
     private final IDbProvider _db_provider;
     private final String _db_prefix;
+    private final Logger _logger;
 
     @Inject
-    public CallMeDao(IDbProvider db_provider, @Named("db-prefix")String db_prefix)
+    public CallMeDao(IDbProvider db_provider, @Named("db-prefix")String db_prefix, Logger logger)
     {
         _db_provider = db_provider;
         _db_prefix = db_prefix;
+        _logger = logger;
     }
 
     public void Add(CallMe item) throws IllegalAccessException
@@ -35,7 +41,7 @@ public class CallMeDao
         }
         catch (SQLException ex)
         {
-            System.err.println(ex.getMessage());
+            _logger.log(Level.WARNING, ex.getMessage() + " -- " + sql);
             throw new IllegalArgumentException(ex);
         }
     }
@@ -59,6 +65,8 @@ public class CallMeDao
         }
         catch (SQLException ex)
         {
+            _logger.log(Level.WARNING, ex.getMessage());
+
             if (ex.getSQLState().equals("42S01") && ex.getErrorCode() == 1050)
             {
                 result.addProperty("status", "error");
@@ -77,5 +85,75 @@ public class CallMeDao
         }
 
         return result;
+    }
+
+    public List<CallMe> GetAll()
+    {
+        List<CallMe> res = new ArrayList<>();
+        String sql = "SELECT * FROM " + _db_prefix + "call_me";
+
+        try(Statement statement = _db_provider.GetConnection().createStatement())
+        {
+            ResultSet result_set = statement.executeQuery(sql);
+
+            while(result_set.next())
+            {
+                res.add(new CallMe(result_set));
+            }
+        }
+        catch (SQLException ex) { _logger.log(Level.WARNING, ex.getMessage()); }
+
+        return res;
+    }
+
+    public CallMe GetById(String id)
+    {
+        String sql = "SELECT * FROM " + _db_prefix + "call_me WHERE id = ?";
+
+        try(PreparedStatement prep = _db_provider.GetConnection().prepareStatement(sql))
+        {
+            prep.setString(1, id);
+
+            ResultSet resultSet = prep.executeQuery();
+
+            if(resultSet.next())
+                return new CallMe(resultSet);
+        }
+        catch (Exception ex) { _logger.log(Level.WARNING, ex.getMessage() + " -- " + sql ); }
+
+        return null;
+    }
+
+    public boolean SetCallMoment(CallMe item)
+    {
+        String sql = "SELECT CURRENT_TIMESTAMP";
+        Timestamp timestamp;
+
+        try( Statement statement = _db_provider.GetConnection().createStatement() )
+        {
+            ResultSet resultSet = statement.executeQuery(sql);
+
+            resultSet.next();
+            timestamp = resultSet.getTimestamp(1);
+            item.SetCallMoment(new Date(timestamp.getTime()));
+        }
+        catch( Exception ex )
+        {
+            _logger.log( Level.WARNING, ex.getMessage() + " -- " + sql );
+            return false ;
+        }
+
+        sql = "UPDATE " + _db_prefix + "call_me SET call_moment = ? WHERE id = ?";
+
+        try( PreparedStatement prep = _db_provider.GetConnection().prepareStatement(sql))
+        {
+            prep.setTimestamp(1, timestamp);
+            prep.setString(2, item.GetId());
+            prep.execute();
+            return true;
+        }
+        catch( Exception ex ) { _logger.log( Level.WARNING, ex.getMessage() + " -- " + sql ); }
+
+        return false ;
     }
 }
