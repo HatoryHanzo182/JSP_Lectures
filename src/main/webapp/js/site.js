@@ -159,6 +159,9 @@ function MakeCallClick(e)
                 alert(j);
             else
                 e.target.parentNode.innerHTML = j._call_moment;
+
+            const message_element = document.getElementById("message");
+            message_element.innerHTML = "Your order №" + j;
         })
     }
 }

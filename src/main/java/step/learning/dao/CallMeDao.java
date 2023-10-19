@@ -6,7 +6,6 @@ import com.google.inject.Singleton;
 import com.google.inject.name.Named;
 import step.learning.dto.entities.CallMe;
 import step.learning.services.db.IDbProvider;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -31,12 +30,26 @@ public class CallMeDao
 
     public void Add(CallMe item) throws IllegalAccessException
     {
-        String sql = "INSERT INTO " + _db_prefix + "call_me (`name`, `phone`) VALUES(?,?)";
+        String sql = "INSERT INTO " + _db_prefix + "call_me (`name`, `phone`, `id`, `moment`, `call_moment`) VALUES(?,?,?,?,?)";
 
-        try(PreparedStatement prep = _db_provider.GetConnection().prepareStatement(sql))
+        try (PreparedStatement prep = _db_provider.GetConnection().prepareStatement(sql))
         {
             prep.setString(1, item.GetName());
             prep.setString(2, item.GetPhone());
+
+            if (item.GetId() != null)
+                prep.setString(3, item.GetId());
+            else
+                prep.setNull(3, Types.BIGINT);
+            if (item.GetMoment() != null)
+                prep.setTimestamp(4, new Timestamp(item.GetMoment().getTime()));
+            else
+                prep.setTimestamp(4, new Timestamp(System.currentTimeMillis()));
+            if (item.GetCallMoment() != null)
+                prep.setTimestamp(5, new Timestamp(item.GetCallMoment().getTime()));
+            else
+                prep.setNull(5, Types.TIMESTAMP);
+
             prep.execute();
         }
         catch (SQLException ex)

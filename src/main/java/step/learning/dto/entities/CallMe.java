@@ -1,7 +1,6 @@
 package step.learning.dto.entities;
 
 import com.google.gson.JsonObject;
-
 import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.util.Date;

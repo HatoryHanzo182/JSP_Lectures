@@ -54,3 +54,4 @@
     <button type="button" id="db-get-all-button" class="waves-effect light-blue btn"><i class="material-icons right">cloud</i>Просмотреть</button>
 </div>
 <div id="db-get-all-container"></div>
+<div id="message"></div>
