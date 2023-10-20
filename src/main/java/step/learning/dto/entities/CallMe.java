@@ -13,6 +13,7 @@ public class CallMe
     private String _phone;
     private Date _moment;
     private Date _call_moment;
+    private Date _delete_moment;
 
     public CallMe()
     {
@@ -42,7 +43,12 @@ public class CallMe
             Timestamp call_moment_timestamp = result_set.getTimestamp("call_moment");
 
             if(call_moment_timestamp != null)
-                SetCallMoment(result_set.getDate("call_moment"));
+                SetCallMoment(new Date(call_moment_timestamp.getTime()));
+
+            Timestamp del_moment_timestamp = result_set.getTimestamp("delete_moment");
+
+            if(del_moment_timestamp != null)
+                SetDeleteMoment(new Date(del_moment_timestamp.getTime()));
         }
         catch (Exception ex) { throw new IllegalArgumentException(ex); }
     }
@@ -58,10 +64,12 @@ public class CallMe
     }
     public void SetMoment(Date moment) { this._moment = moment; }
     public void SetCallMoment(Date call_moment) { this._call_moment = call_moment; }
+    public void SetDeleteMoment(Date _delete_moment) { this._delete_moment = _delete_moment; }
 
     public String GetId() { return _id; }
     public String GetName() { return _name; }
     public String GetPhone() { return _phone; }
     public Date GetMoment() { return _moment; }
     public Date GetCallMoment() { return _call_moment; }
+    public Date GetDeleteMoment() { return _delete_moment; }
 }

@@ -122,7 +122,7 @@ public class DbServlet extends HttpServlet
         if(call_id == null)
         {
             resp.setStatus(400);
-            resp.getWriter().print("Missing required URL-parameter: 'call-id'");
+            resp.getWriter().print("\"Missing required URL-parameter: 'call-id'\"");
             return;
         }
 
@@ -131,17 +131,56 @@ public class DbServlet extends HttpServlet
         if (call_me == null)
         {
             resp.setStatus(404);
-            resp.getWriter().print("Requested 'call-id' not found");
+            resp.getWriter().print("\"Requested 'call-id' not found\"");
             return;
         }
         if(call_me.GetCallMoment() != null)
         {
             resp.setStatus(422);
-            resp.getWriter().print("Unprocessable Content: requested 'call-id' already");
+            resp.getWriter().print("\"Unprocessable Content: requested 'call-id' already\"");
             return;
         }
         if (_call_me_dao.SetCallMoment(call_me))
             resp.getWriter().print(new Gson().toJson(call_me));
+        else
+        {
+            resp.setStatus(500);
+            resp.getWriter().print("\"Internal Server Error: details in server logs\"");
+            return;
+        }
+    }
+
+    @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
+    {
+        resp.setContentType("application/json");
+        String call_id =  req.getParameter("call-id");
+
+        if(call_id == null)
+        {
+            resp.setStatus(400);
+            resp.getWriter().print("\"Missing required URL-parameter: 'call-id'\"");
+            return;
+        }
+
+        CallMe call_me = _call_me_dao.GetById(call_id);
+
+        if (call_me == null)
+        {
+            resp.setStatus(404);
+            resp.getWriter().print("\"Requested 'call-id' not found\"");
+            return;
+        }
+
+        if(call_me.GetDeleteMoment() != null)
+        {
+            resp.setStatus(422);
+            resp.getWriter().print("\"Unprocessable Content: requested 'call-id' already\"");
+            return;
+        }
+
+        if (_call_me_dao.Delete(call_me))
+            resp.setStatus(204);
         else
         {
             resp.setStatus(500);

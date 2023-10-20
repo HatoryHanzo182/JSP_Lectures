@@ -73,7 +73,7 @@ function ShowCalls(json)
     const container = document.getElementById("db-get-all-container");
 
     if(!container)
-        throw "#db-get-all-button not found";
+        throw "#db-get-all-container not found" ;
 
     const table = document.createElement('table');
 
@@ -92,9 +92,20 @@ function ShowCalls(json)
     const th3 = document.createElement('th');
 
     th3.innerText = 'phone';
+
+    const th4 = document.createElement('th');
+
+    th4.innerText = 'call';
+
+    const th5 = document.createElement('th');
+
+    th5.innerText = 'Delete';
+
     tr.appendChild(th1);
     tr.appendChild(th2);
     tr.appendChild(th3);
+    tr.appendChild(th4);
+    tr.appendChild(th5);
     thead.appendChild(tr);
     table.appendChild(thead);
 
@@ -121,9 +132,9 @@ function ShowCalls(json)
 
         const td4 = document.createElement('td');
 
-        if(typeof call._call_moment == 'undefined' || call._call_moment == null)
+        if( typeof call._call_moment == 'undefined' || call._call_moment == null )
         {
-            const btn = document.createElement('button')
+            const btn = document.createElement('button');
 
             btn.appendChild(document.createTextNode("call"));
             btn.classList.add('btn');
@@ -131,20 +142,31 @@ function ShowCalls(json)
             btn.classList.add('waves-light');
             btn.classList.add('light-blue');
             btn.addEventListener('click', MakeCallClick);
-            btn.setAttribute('data-call-id', call._id);
-
+            btn.setAttribute('data-call-id', call.id) ;
             td4.appendChild(btn);
         }
         else
-            td4.appendChild(document.createTextNode(call._call_moment))
+            td4.appendChild(document.createTextNode(call._call_moment));
 
         tr.appendChild(td4);
+
+        const td5 = document.createElement('td');
+        const btn5 = document.createElement('button');
+
+        btn5.appendChild(document.createTextNode("DELETE"));
+        btn5.classList.add('btn');
+        btn5.classList.add('white-text');
+        btn5.classList.add('red');
+        btn5.addEventListener('click', DeleteCallClick);
+        btn5.setAttribute( 'data-call-id', call._id ) ;
+        td5.appendChild(btn5);
+        tr.appendChild(td5);
+
         tbody.appendChild(tr);
     });
-
     table.appendChild(tbody);
-    container.innerHTML = ""
-    container.appendChild(table);
+    container.innerHTML = "";
+    container.appendChild( table ) ;
 }
 
 function MakeCallClick(e)
@@ -163,5 +185,27 @@ function MakeCallClick(e)
             const message_element = document.getElementById("message");
             message_element.innerHTML = "Your order №" + j;
         })
+    }
+}
+
+function DeleteCallClick(e)
+{
+    const call_id = e.target.getAttribute('data-call-id');
+
+    if(confirm("Delete order " + call_id))
+    {
+        fetch(window.location.href + "?call-id=" + call_id, {method: 'DELETE'}).then(r =>
+        {
+            if (r.status === 204)
+            {
+                const tr = e.target.parentNode.parentNode;
+
+                tr.parentNode.removeChild(tr);
+            }
+            else
+            {
+                r.json().then(alert);
+            }
+        });
     }
 }

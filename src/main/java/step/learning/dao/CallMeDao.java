@@ -100,10 +100,15 @@ public class CallMeDao
         return result;
     }
 
-    public List<CallMe> GetAll()
+    public List<CallMe> GetAll() { return GetAll(false); }
+
+    public List<CallMe> GetAll(boolean include_deleted)
     {
         List<CallMe> res = new ArrayList<>();
         String sql = "SELECT * FROM " + _db_prefix + "call_me";
+
+        if (!include_deleted)
+            sql += " WHERE delete_moment IS NULL";
 
         try(Statement statement = _db_provider.GetConnection().createStatement())
         {
@@ -119,9 +124,14 @@ public class CallMeDao
         return res;
     }
 
-    public CallMe GetById(String id)
+    public CallMe GetById(String id) { return GetById(id, false); }
+
+    public CallMe GetById(String id, boolean include_deleted)
     {
         String sql = "SELECT * FROM " + _db_prefix + "call_me WHERE id = ?";
+
+        if (!include_deleted)
+            sql += " AND delete_moment IS NULL";
 
         try(PreparedStatement prep = _db_provider.GetConnection().prepareStatement(sql))
         {
@@ -168,5 +178,29 @@ public class CallMeDao
         catch( Exception ex ) { _logger.log( Level.WARNING, ex.getMessage() + " -- " + sql ); }
 
         return false ;
+    }
+
+    public boolean Delete(CallMe item) { return Delete(item, false); }
+
+    public boolean Delete(CallMe item, boolean hard_delete)
+    {
+        String sql;
+
+        if(hard_delete)
+            sql = "DELETE FROM " + _db_prefix + "call_me WHERE id = ?";
+        else
+            sql = "UPDATE " + _db_prefix + "call_me SET delete_moment = CURRENT_TIMESTAMP WHERE id = ?";
+
+        try(PreparedStatement prep = _db_provider.GetConnection().prepareStatement(sql))
+        {
+            prep.setString(1, item.GetId());
+            prep.execute();
+            return true;
+        }
+        catch (SQLException ex)
+        {
+            _logger.log(Level.WARNING, ex.getMessage() + " -- " + sql );
+            return false;
+        }
     }
 }
