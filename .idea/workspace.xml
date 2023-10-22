@@ -9297,12 +9297,10 @@
       <change beforePath="$PROJECT_DIR$/../../JS/СlassApplication/Webpack/src/statistics.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../JS/СlassApplication/Webpack/webpack.config.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/33219d85-3975-4726-8cc8-8749f279ffe5.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/33219d85-3975-4726-8cc8-8749f279ffe5.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/33219d85-3975-4726-8cc8-8749f279ffe5/storage_v2/_src_/schema/db_jsp.Bmk2sA.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/33219d85-3975-4726-8cc8-8749f279ffe5/storage_v2/_src_/schema/db_jsp.Bmk2sA.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/step/learning/dao/CallMeDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/step/learning/dao/CallMeDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/step/learning/dto/entities/CallMe.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/step/learning/dto/entities/CallMe.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/step/learning/servlets/DbServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/step/learning/servlets/DbServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/step/learning/services/db/PlanetDbProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/step/learning/services/db/PlanetDbProvider.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/db.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/db.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/js/site.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/js/site.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Python/PythonGallows/.vs/PythonGallows/FileContentIndex/2bc0e6a0-798e-4ddc-bec0-2b646f132a62.vsidx" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Python/PythonGallows/.vs/PythonGallows/FileContentIndex/read.lock" beforeDir="false" />
@@ -9540,6 +9538,8 @@
       <workItem from="1697737799521" duration="1579000" />
       <workItem from="1697741656140" duration="129000" />
       <workItem from="1697802702994" duration="5137000" />
+      <workItem from="1697808059097" duration="110000" />
+      <workItem from="1697998955368" duration="3747000" />
     </task>
     <servers />
   </component>

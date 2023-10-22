@@ -31,7 +31,6 @@ public class PlanetDbProvider implements IDbProvider
             catch (IOException ex) { throw new RuntimeException(ex); }
             catch (NullPointerException ex) { throw new RuntimeException("Resource not found"); }
 
-
             try
             {
                 JsonObject planet_config = db_config.get("DataProviders").getAsJsonObject().get("PlanetScale").getAsJsonObject();
