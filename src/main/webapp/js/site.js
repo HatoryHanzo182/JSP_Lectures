@@ -116,15 +116,15 @@ function ShowCalls(json)
         const tr = document.createElement('tr');
         const td1 = document.createElement('td');
 
-        td1.innerText = call.id;
+        td1.innerText = call._id;
 
         const td2 = document.createElement('td');
 
-        td2.innerText = call.name;
+        td2.innerText = call._name;
 
         const td3 = document.createElement('td');
 
-        td3.innerText = call.phone;
+        td3.innerText = call._phone;
 
         tr.appendChild(td1);
         tr.appendChild(td2);
@@ -132,7 +132,7 @@ function ShowCalls(json)
 
         const td4 = document.createElement('td');
 
-        if(typeof call.call_moment == 'undefined' || call.call_moment == null)
+        if(typeof call._call_moment == 'undefined' || call._call_moment == null)
         {
             const btn = document.createElement('button');
 
@@ -142,11 +142,11 @@ function ShowCalls(json)
             btn.classList.add('waves-light');
             btn.classList.add('light-blue');
             btn.addEventListener('click', MakeCallClick);
-            btn.setAttribute('data-call-id', call.id) ;
+            btn.setAttribute('data-call-id', call._id) ;
             td4.appendChild(btn);
         }
         else
-            td4.appendChild(document.createTextNode(call.call_moment));
+            td4.appendChild(document.createTextNode(call._call_moment));
 
         tr.appendChild(td4);
 
@@ -158,7 +158,7 @@ function ShowCalls(json)
         btn5.classList.add('white-text');
         btn5.classList.add('red');
         btn5.addEventListener('click', DeleteCallClick);
-        btn5.setAttribute( 'data-call-id', call.id ) ;
+        btn5.setAttribute( 'data-call-id', call._id ) ;
         td5.appendChild(btn5);
         tr.appendChild(td5);
 
@@ -178,10 +178,10 @@ function MakeCallClick(e)
     {
         fetch(window.location.href + "?call-id=" + call_id, {method: 'CALL'}).then(r => r.json()).then(j =>
         {
-            if(typeof j.call_moment == 'undefined')
+            if(typeof j._call_moment == 'undefined')
                 alert(j);
             else
-                e.target.parentNode.innerHTML = j.call_moment;
+                e.target.parentNode.innerHTML = j._call_moment;
 
             const message_element = document.getElementById("message");
             message_element.innerHTML = "Your order №" + j;

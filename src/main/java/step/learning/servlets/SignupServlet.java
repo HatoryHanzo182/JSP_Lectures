@@ -56,6 +56,11 @@ public class SignupServlet extends HttpServlet
                         validation_errors.put(key, translation);
                 }
                 req.setAttribute("validation_errors", validation_errors);
+
+                if(validation_errors.isEmpty())
+                {
+
+                }
             }
         }
         req.setAttribute("page-body", "signup.jsp");
