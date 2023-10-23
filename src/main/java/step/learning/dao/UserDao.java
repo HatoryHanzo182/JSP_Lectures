@@ -59,16 +59,28 @@ public class UserDao
 
     public boolean AddFromForm(SignupFormModel model)
     {
-        String sql = "INSERT INTO" + _db_prefix + "users (" +
-                "`login`, `real_name`, `email`, `pass_dk`, `birthday`, `avatar_url`)" +
+        String sql = "INSERT INTO " + _db_prefix + "users (" +
+                "`login`, `real_name`, `email`,`salt`, `pass_dk`, `birthday`, `avatar_url`)" +
                 " VALUES(?,?,?,?,?,?,?)";
         String salt = _random_services.RandomHex(16);
         String pass_dk = _hash_service.Hash(salt + model.GetPassword() + salt);
 
         try(PreparedStatement prep = _db_provider.GetConnection().prepareStatement(sql))
         {
+            prep.setString(1, model.GetLogin());
+            prep.setString(2, model.GetName());
+            prep.setString(3, model.GetEmail());
+            prep.setString(4, salt);
+            prep.setString(5, pass_dk);
 
+            java.util.Date date = model.GetBirthdate();
+
+            prep.setDate(6, date == null ? null : new java.sql.Date(date.getTime()));
+            prep.setString(7, model.GetAvatar());
+            prep.executeUpdate();
+            return true;
         }
+        catch (Exception ex) { _logger.log(Level.WARNING, ex.getMessage() + " - - " + sql); }
 
         return false;
     }

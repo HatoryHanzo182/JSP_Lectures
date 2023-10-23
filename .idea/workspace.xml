@@ -10,8 +10,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7c9d6bd6-e772-4b96-b4b4-0ad7718f73ea" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/step/learning/dao/UserDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/step/learning/servlets/AuthServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/step/learning/dao/AuthTokenDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/step/learning/dto/entities/AuthToken.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../.gitattributes" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../.gitignore" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../JS/СlassApplication/Webpack/node_modules/caniuse-lite/LICENSE" beforeDir="false" />
@@ -9299,9 +9299,9 @@
       <change beforePath="$PROJECT_DIR$/../../JS/СlassApplication/Webpack/src/statistics.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../JS/СlassApplication/Webpack/webpack.config.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/step/learning/ioc/RouterModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/step/learning/ioc/RouterModule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/step/learning/dao/UserDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/step/learning/dao/UserDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/step/learning/servlets/AuthServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/step/learning/servlets/AuthServlet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/step/learning/servlets/SignupServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/step/learning/servlets/SignupServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/js/site.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/js/site.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Python/PythonGallows/.vs/PythonGallows/FileContentIndex/2bc0e6a0-798e-4ddc-bec0-2b646f132a62.vsidx" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Python/PythonGallows/.vs/PythonGallows/FileContentIndex/read.lock" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Python/PythonGallows/.vs/PythonGallows/v17/.suo" beforeDir="false" />
@@ -9540,7 +9540,7 @@
       <workItem from="1697802702994" duration="5137000" />
       <workItem from="1697808059097" duration="110000" />
       <workItem from="1697998955368" duration="3747000" />
-      <workItem from="1698057184329" duration="4769000" />
+      <workItem from="1698057184329" duration="10328000" />
     </task>
     <servers />
   </component>
@@ -9559,6 +9559,30 @@
     </option>
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/step/learning/servlets/SignupServlet.java</url>
+          <line>62</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/step/learning/servlets/SignupServlet.java</url>
+          <line>45</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/step/learning/servlets/SignupServlet.java</url>
+          <line>40</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/step/learning/servlets/SignupServlet.java</url>
+          <line>73</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
         <PinnedItemInfo parentTag="org.apache.catalina.session.StandardSessionFacade" memberName="session" />
