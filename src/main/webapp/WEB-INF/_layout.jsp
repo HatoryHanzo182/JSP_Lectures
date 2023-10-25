@@ -35,16 +35,31 @@
 <div id="auth-modal" class="modal">
     <div class="modal-content">
         <h4>Authentication</h4>
-        <p>A bunch of text</p>
+        <div class="row">
+            <div class="input-field col s6">
+                <i class="material-icons prefix">person</i>
+                <input id="auth-login" name="auth-login" type="text" class="validate">
+                <label for="auth-login">Login</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s6">
+                <i class="material-icons prefix">lock</i>
+                <input id="auth-password" name="auth-password" type="password" class="validate">
+                <label for="auth-password">Password</label>
+            </div>
+        </div>
     </div>
     <div class="modal-footer">
+        <b id="auth-message-container"></b>
         <a href="<%=context%>/signup" class="modal-close light-blue btn-flat lighten-2">Sign up</a>
-        <a href="#!" class="modal-close waves-effect waves-green light-blue btn-flat">Sign in</a>
+        <button id="auth-modal-sign-in-button" class="modal-close waves-effect waves-green light-blue btn-flat">Sign in</button>
     </div>
 </div>
 <!-- Compiled and minified JavaScript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-<script src="<%=context%>/js/site.js?<%=time%>"></script>
+<script src="<%=context%>/js/site.js"></script>
+<script src="<%=context%>/js/auth.js?<%=time%>"></script>
 </body>
 <footer class="page-footer light-blue">
     <div class="container">

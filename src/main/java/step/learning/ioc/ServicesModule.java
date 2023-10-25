@@ -12,6 +12,8 @@ import step.learning.services.formparse.MixedFormParsService;
 import step.learning.services.hash.IHashService;
 import step.learning.services.hash.Md5HashService;
 import step.learning.services.hash.Sha1HashService;
+import step.learning.services.kdf.DigestHashKdfService;
+import step.learning.services.kdf.IKdfService;
 import step.learning.services.random.*;
 
 public class ServicesModule extends AbstractModule
@@ -24,6 +26,7 @@ public class ServicesModule extends AbstractModule
         bind(IResourceProvider.class).to(StringResourceProvider.class);
         bind(IFormParsService.class).to(MixedFormParsService.class);
         bind(IDbProvider.class).to(PlanetDbProvider.class);
+        bind(IKdfService.class).to(DigestHashKdfService.class);
         bind(String.class).annotatedWith(Names.named("db-prefix")).toInstance("java_web");
     }
 

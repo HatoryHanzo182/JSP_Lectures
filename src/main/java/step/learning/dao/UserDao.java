@@ -3,12 +3,14 @@ package step.learning.dao;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.google.inject.name.Named;
+import step.learning.dto.entities.User;
 import step.learning.dto.models.SignupFormModel;
 import step.learning.services.db.IDbProvider;
-import step.learning.services.hash.IHashService;
+import step.learning.services.kdf.IKdfService;
 import step.learning.services.random.IRandomServices;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,17 +22,17 @@ public class UserDao
     private final String _db_prefix;
     private final Logger _logger;
     private final IRandomServices _random_services;
-    private final IHashService _hash_service;
+    private final IKdfService _kdf_service;
 
     @Inject
     public UserDao(IDbProvider db_provider, @Named("db-prefix") String db_prefix, Logger logger,
-                   IRandomServices random_services, @Named("Digest-hash") IHashService hash_service)
+                   IRandomServices random_services, IKdfService kdf_service)
     {
         _db_provider = db_provider;
         _db_prefix = db_prefix;
         _logger = logger;
         _random_services = random_services;
-        _hash_service = hash_service;
+        _kdf_service = kdf_service;
     }
 
     public boolean Install()
@@ -63,7 +65,7 @@ public class UserDao
                 "`login`, `real_name`, `email`,`salt`, `pass_dk`, `birthday`, `avatar_url`)" +
                 " VALUES(?,?,?,?,?,?,?)";
         String salt = _random_services.RandomHex(16);
-        String pass_dk = _hash_service.Hash(salt + model.GetPassword() + salt);
+        String pass_dk = _kdf_service.GetDerivedKey(model.GetPassword(), salt);
 
         try(PreparedStatement prep = _db_provider.GetConnection().prepareStatement(sql))
         {
@@ -83,5 +85,32 @@ public class UserDao
         catch (Exception ex) { _logger.log(Level.WARNING, ex.getMessage() + " - - " + sql); }
 
         return false;
+    }
+
+    public User GetUserByCredentials(String login, String password)
+    {
+        if(login == null || password == null)
+            return null;
+
+        String sql = "SELECT u.* FROM " + _db_prefix + "users u WHERE u. `login` = ?";
+
+        try(PreparedStatement prep = _db_provider.GetConnection().prepareStatement(sql))
+        {
+            prep.setString(1, login);
+
+            ResultSet result_set = prep.executeQuery();
+
+            if(result_set.next())
+            {
+                User user = new User(result_set);
+                String pass_dk = _kdf_service.GetDerivedKey(password, user.get_salt());
+
+                if(pass_dk.equals(user.get_pass_dk()))
+                    return user;
+            }
+        }
+        catch (Exception ex) { _logger.log(Level.WARNING, ex.getMessage() + " - - " + sql); }
+
+        return null;
     }
 }
