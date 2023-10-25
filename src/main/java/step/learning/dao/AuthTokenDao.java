@@ -59,25 +59,25 @@ public class AuthTokenDao
 
         AuthToken token = new AuthToken();
 
-        token.set_jti(UUID.randomUUID().toString());
-        token.set_sub(user.get_id());
+        token.SetJti(UUID.randomUUID().toString());
+        token.SetSub(user.GetId());
 
         Timestamp now = GetDbTimestamp();
 
         if(now == null)
             return null;
 
-        token.set_iat(new Date(now.getTime()));
-        token.set_exp(new Date(now.getTime() + 1000 * 60 * 60 * 24));
+        token.SetIat(new Date(now.getTime()));
+        token.SetExp(new Date(now.getTime() + 1000 * 60 * 60 * 24));
 
         String sql = "INSERT INTO " + _db_prefix + "auth_tokens (`jti`, `sub`, `iat`, `exp`)" +
                 "VALUES (UUID_TO_BIN(?), ?, ?, ?)";
         try(PreparedStatement prep = _db_provider.GetConnection().prepareStatement(sql))
         {
-            prep.setString(1, token.get_jti());
-            prep.setString(2, token.get_sub());
-            prep.setTimestamp(3, new Timestamp(token.get_iat().getTime()));
-            prep.setTimestamp(4, new Timestamp(token.get_exp().getTime()));
+            prep.setString(1, token.GetJti());
+            prep.setString(2, token.GetSub());
+            prep.setTimestamp(3, new Timestamp(token.GetIat().getTime()));
+            prep.setTimestamp(4, new Timestamp(token.GetExp().getTime()));
             prep.executeUpdate();
 
             return token;

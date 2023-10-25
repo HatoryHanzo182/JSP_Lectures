@@ -7,12 +7,12 @@ import com.google.inject.Singleton;
 import step.learning.dao.AuthTokenDao;
 import step.learning.dao.UserDao;
 import step.learning.dto.entities.AuthToken;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Base64;
 
 @Singleton
 public class AuthServlet extends HttpServlet
@@ -41,7 +41,8 @@ public class AuthServlet extends HttpServlet
         String login = req.getParameter("login");
         String password = req.getParameter("password");
 
-        if(login == null || password == null) {
+        if(login == null || password == null)
+        {
             SendResponse(resp, 400, "login and password are required");
             return;
         }
@@ -59,7 +60,10 @@ public class AuthServlet extends HttpServlet
             return;
         }
 
-        SendResponse(resp, 202, token);
+        String json_token = _gson.toJson(token);
+        String encoding_token = Base64.getUrlEncoder().encodeToString(json_token.getBytes());
+
+        SendResponse(resp, 202, encoding_token);
     }
 
     @Override

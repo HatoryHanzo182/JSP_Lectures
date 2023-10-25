@@ -103,9 +103,9 @@ public class UserDao
             if(result_set.next())
             {
                 User user = new User(result_set);
-                String pass_dk = _kdf_service.GetDerivedKey(password, user.get_salt());
+                String pass_dk = _kdf_service.GetDerivedKey(password, user.GetSalt());
 
-                if(pass_dk.equals(user.get_pass_dk()))
+                if(pass_dk.equals(user.GetPassDk()))
                     return user;
             }
         }

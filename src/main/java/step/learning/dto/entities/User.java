@@ -25,103 +25,45 @@ public class User
 
     public User(ResultSet result_set) throws SQLException
     {
-        this.set_id(result_set.getString("id"));
-        this.set_login(result_set.getString("login"));
-        this.set_real_name(result_set.getString("real_name"));
-        this.set_email(result_set.getString("email"));
-        this.set_salt(result_set.getString("salt"));
-        this.set_pass_dk(result_set.getString("pass_dk"));
-        this.set_birthday(result_set.getDate("birthday"));
-        this.set_avatar(result_set.getString("avatar_url"));
-        this.set_register_moment(result_set.getDate("register_moment"));
+        this.SetId(result_set.getString("id"));
+        this.SetLogin(result_set.getString("login"));
+        this.SetRealName(result_set.getString("real_name"));
+        this.SetEmail(result_set.getString("email"));
+        this.SetSalt(result_set.getString("salt"));
+        this.SetPassDk(result_set.getString("pass_dk"));
+        this.SetBirthday(result_set.getDate("birthday"));
+        this.SetAvatar(result_set.getString("avatar_url"));
 
         Timestamp timestamp = result_set.getTimestamp("register_moment") ;
-        if( timestamp != null ) {
-            this.set_register_moment( new Date( timestamp.getTime() ) ); ;
-        }
+
+        if( timestamp != null )
+            this.SetRegisterMoment( new Date( timestamp.getTime() ) );
+
         timestamp = result_set.getTimestamp("delete_moment") ;
-        if( timestamp != null ) {
-            this.set_delete_moment( new Date( timestamp.getTime() ) ); ;
-        }
+
+        if( timestamp != null )
+            this.SetDeleteMoment( new Date( timestamp.getTime() ) );
     }
 
-    public String get_id() {
-        return _id;
-    }
+    public void SetId(String id) { this._id = id; }
+    public void SetLogin(String login) { this._login = login; }
+    public void SetRealName(String real_name) { this._real_name = real_name; }
+    public void SetEmail(String email) { this._email = email; }
+    public void SetSalt(String salt) { this._salt = salt; }
+    public void SetPassDk(String pass_dk) { this._pass_dk = pass_dk; }
+    public void SetBirthday(Date birthday) { this._birthday = birthday; }
+    public void SetAvatar(String avatar) { this._avatar = avatar; }
+    public void SetRegisterMoment(Date register_moment) { this._register_moment = register_moment; }
+    public void SetDeleteMoment(Date delete_moment) { this._delete_moment = delete_moment; }
 
-    public void set_id(String _id) {
-        this._id = _id;
-    }
-
-    public String get_login() {
-        return _login;
-    }
-
-    public void set_login(String _login) {
-        this._login = _login;
-    }
-
-    public String get_real_name() {
-        return _real_name;
-    }
-
-    public void set_real_name(String _real_name) {
-        this._real_name = _real_name;
-    }
-
-    public String get_email() {
-        return _email;
-    }
-
-    public void set_email(String _email) {
-        this._email = _email;
-    }
-
-    public String get_salt() {
-        return _salt;
-    }
-
-    public void set_salt(String _salt) {
-        this._salt = _salt;
-    }
-
-    public String get_pass_dk() {
-        return _pass_dk;
-    }
-
-    public void set_pass_dk(String _pass_dk) {
-        this._pass_dk = _pass_dk;
-    }
-
-    public Date get_birthday() {
-        return _birthday;
-    }
-
-    public void set_birthday(Date _birthday) {
-        this._birthday = _birthday;
-    }
-
-    public String get_avatar() {
-        return _avatar;
-    }
-
-    public void set_avatar(String _avatar) {
-        this._avatar = _avatar;
-    }
-
-    public Date get_register_moment() {
-        return _register_moment;
-    }
-
-    public void set_register_moment(Date _register_moment) {
-        this._register_moment = _register_moment;
-    }
-
-    public Date get_delete_moment() {
-        return _delete_moment;
-    }
-
-    public void set_delete_moment(Date _delete_moment) {
-        this._delete_moment = _delete_moment;
-    }
+    public String GetId() { return _id; }
+    public String GetLogin() { return _login; }
+    public String GetRealName() { return _real_name; }
+    public String GetEmail() { return _email; }
+    public String GetSalt() { return _salt; }
+    public String GetPassDk() { return _pass_dk; }
+    public Date GetBirthday() { return _birthday; }
+    public String GetAvatar() { return _avatar; }
+    public Date GetRegisterMoment() { return _register_moment; }
+    public Date GetDeleteMoment() { return _delete_moment; }
 }
