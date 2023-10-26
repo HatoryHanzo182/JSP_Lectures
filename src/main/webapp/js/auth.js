@@ -15,6 +15,17 @@
 
     const spa_container = document.getElementById("spa-container");
 
+    const spa_logout_button = document.getElementById("spa-btn-logout");
+
+    if (spa_logout_button)
+        spa_logout_button.addEventListener('click', SpaLogoutClick);
+
+    const spa_get_info_button = document.getElementById("spa-btn-get-info");
+
+    if (spa_get_info_button)
+        spa_get_info_button.addEventListener('click', SpaGetInfoClick);
+
+
     if (spa_container)
     {
         const token = window.localStorage.getItem("token202");
@@ -120,6 +131,22 @@ function SignInButtonClick()
         else
             auth_message.innerText = 'В аутентификации отказано';
     })
+}
+
+function SpaLogoutClick()
+{
+    window.localStorage.removeItem("token202");
+    window.location.reload();
+}
+
+function SpaGetInfoClick()
+{
+    fetch(`${GetAppContext()}/uk/tpl/template1.html`,{ method: 'GET',
+        headers: {'Authorization': `Bearer ${window.localStorage.getItem('token202')}`} })
+        .then(r=>r.text()).then(t =>
+    {
+        document.getElementById("spa-container").innerHTML = t ;
+    });
 }
 
 function GetAppContext()

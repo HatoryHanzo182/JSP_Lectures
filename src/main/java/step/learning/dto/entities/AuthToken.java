@@ -1,5 +1,7 @@
 package step.learning.dto.entities;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Date;
 
 public class AuthToken
@@ -8,6 +10,19 @@ public class AuthToken
     private String _sub;
     private Date _iat;
     private Date _exp;
+
+    public AuthToken()
+    {
+
+    }
+
+    public AuthToken(ResultSet result_set) throws SQLException
+    {
+        this.SetJti(result_set.getString("jti"));
+        this.SetSub(result_set.getString("sub"));
+        this.SetIat(new Date(result_set.getTimestamp("iat").getTime()));
+        this.SetExp(new Date(result_set.getTimestamp("exp").getTime()));
+    }
 
     public void SetJti(String _jti) { this._jti = _jti; }
     public void SetSub(String _sub) { this._sub = _sub; }
