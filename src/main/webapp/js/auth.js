@@ -115,17 +115,19 @@ function SignInButtonClick()
                 {
                     const token = JSON.parse(atob(t));
 
-                    if (typeof token.jti === 'undefined')
+                    console.log(token);
+                    if (typeof token._jti === 'undefined')
                         auth_message.innerText = "Целостность токена нарушена";
                     else
                     {
                         window.localStorage.setItem("token202", t);
-                        window.location.reload();
+                        //window.location.reload();
+                        console.log(t);
                     }
                 }
                 catch (ex) { auth_message.innerText = 'Ошибка данных!'; }
 
-                console.log(t);
+
             });
         }
         else
@@ -141,16 +143,32 @@ function SpaLogoutClick()
 
 function SpaGetInfoClick()
 {
+    const spa_container =  document.getElementById("spa-container");
+
+    if(!spa_container)
+        throw "#spa-container not found";
+
     fetch(`${GetAppContext()}/uk/tpl/template1.html`,{ method: 'GET',
-        headers: {'Authorization': `Bearer ${window.localStorage.getItem('token202')}`} })
-        .then(r=>r.text()).then(t =>
-    {
-        document.getElementById("spa-container").innerHTML = t ;
-    });
+        headers: {'Authorization': `Bearer ${window.localStorage.getItem('token202')}`}})
+        .then(r=> r.text()).then(t =>
+        {
+            spa_container.innerHTML = t;
+        });
+
+    fetch(`${GetAppContext()}/uk/tpl/NP.png`,{ method: 'GET',
+        headers: {'Authorization': `Bearer ${window.localStorage.getItem('token202')}`}})
+        .then(r=> r.blob()).then(blob =>
+        {
+            const blob_url = URL.createObjectURL(blob);
+
+            console.log(blob_url);
+
+            spa_container.innerHTML += `<img src="${blob_url}"/>`;
+        })
 }
 
 function GetAppContext()
 {
     var is_context_preset = false;
-    return (is_context_preset) ? "" : "/" + window.location.pathname.split('/')[1];
+    return is_context_preset ? "" : "/" + window.location.pathname.split('/')[1];
 }

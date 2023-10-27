@@ -109,7 +109,7 @@ public class AuthTokenDao
 
         try
         {
-            jti = JsonParser.parseString(new String(Base64.getUrlDecoder().decode(bearer_content))).getAsJsonObject().get("jti").getAsString();
+            jti = JsonParser.parseString(new String(Base64.getUrlDecoder().decode(bearer_content))).getAsJsonObject().get("_jti").getAsString();
         }
         catch(Exception ex) { return null; }
 
@@ -121,7 +121,7 @@ public class AuthTokenDao
 
             ResultSet resultSet = prep.executeQuery();
 
-            if (!resultSet.next())
+            if (resultSet.next())
                 return new AuthToken(resultSet);
 
         }

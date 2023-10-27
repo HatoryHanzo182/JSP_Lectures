@@ -54,7 +54,7 @@
     <div class="modal-footer">
         <b id="auth-message-container"></b>
         <a href="<%=context%>/signup" class="modal-close light-blue btn-flat lighten-2">Sign up</a>
-        <button id="auth-modal-sign-in-button" class="modal-close waves-effect waves-green light-blue btn-flat">Sign in</button>
+        <button id="auth-modal-sign-in-button" class="waves-effect waves-green light-blue btn-flat">Sign in</button>
     </div>
 </div>
 <!-- Compiled and minified JavaScript -->
