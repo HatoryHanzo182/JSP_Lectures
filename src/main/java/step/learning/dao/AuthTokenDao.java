@@ -59,6 +59,11 @@ public class AuthTokenDao
         if(user == null)
             return null;
 
+        AuthToken existing_token = GetActiveTokenForUser(user.GetId());
+
+        if (existing_token != null)
+            return existing_token;
+
         AuthToken token = new AuthToken();
 
         token.SetJti(UUID.randomUUID().toString());
@@ -83,6 +88,25 @@ public class AuthTokenDao
             prep.executeUpdate();
 
             return token;
+        }
+        catch (Exception e) { _logger.log(Level.WARNING, e.getMessage() + " -- " + sql); }
+
+        return null;
+    }
+
+    private AuthToken GetActiveTokenForUser(String userId)
+    {
+        String sql = "SELECT BIN_TO_UUID(`jti`) AS jti, `sub`, `iat`, `exp` FROM " + _db_prefix +
+                "auth_tokens WHERE `sub` = ? AND `exp` > CURRENT_TIMESTAMP";
+
+        try (PreparedStatement prep = _db_provider.GetConnection().prepareStatement(sql))
+        {
+            prep.setString(1, userId);
+
+            ResultSet resultSet = prep.executeQuery();
+
+            if (resultSet.next())
+                return new AuthToken(resultSet);
         }
         catch (Exception e) { _logger.log(Level.WARNING, e.getMessage() + " -- " + sql); }
 
