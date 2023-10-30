@@ -14,13 +14,13 @@ public class WebsocketServer
     @OnOpen
     public void onOpen(Session session)
     {
-
+        _sessions.add(session);
     }
 
     @OnClose
     public void onClose(Session session)
     {
-
+        _sessions.remove(session);
     }
 
     @OnMessage
@@ -32,6 +32,6 @@ public class WebsocketServer
     @OnError
     public void onError(Throwable ex, Session session)
     {
-        
+
     }
 }
