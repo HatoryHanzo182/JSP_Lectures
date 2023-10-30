@@ -7,31 +7,28 @@ import java.util.HashSet;
 import java.util.Set;
 
 @ServerEndpoint(value = "/chat")
-public class WebsocketServer
+public class WebsocketController
 {
     private static final Set<Session> _sessions = Collections.synchronizedSet(new HashSet<>());
 
-    @OnOpen
-    public void onOpen(Session session)
+    public static void Broadcast(String message)
     {
-        _sessions.add(session);
+        _sessions.forEach(session ->
+        {
+            try { session.getBasicRemote().sendText(message); }
+            catch (Exception ex) { System.err.println("broadcast: " + ex.getMessage()); }
+        });
     }
+
+    @OnOpen
+    public void onOpen(Session session) { _sessions.add(session); }
 
     @OnClose
-    public void onClose(Session session)
-    {
-        _sessions.remove(session);
-    }
+    public void onClose(Session session) { _sessions.remove(session); }
 
     @OnMessage
-    public void onMessage(String message, Session session)
-    {
-
-    }
+    public void onMessage(String message, Session session) { Broadcast(message); }
 
     @OnError
-    public void onError(Throwable ex, Session session)
-    {
-
-    }
+    public void onError(Throwable ex, Session session) { System.err.println("broadcast: " + ex.getMessage()); }
 }

@@ -10,9 +10,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7c9d6bd6-e772-4b96-b4b4-0ad7718f73ea" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/step/learning/servlets/WsServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/step/learning/ws/WebsocketServer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/ws.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../.gitattributes" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../.gitignore" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../JS/СlassApplication/Webpack/node_modules/caniuse-lite/LICENSE" beforeDir="false" />
@@ -9300,9 +9297,8 @@
       <change beforePath="$PROJECT_DIR$/../../JS/СlassApplication/Webpack/src/statistics.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../JS/СlassApplication/Webpack/webpack.config.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/step/learning/ioc/RouterModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/step/learning/ioc/RouterModule.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/_layout.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/_layout.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/step/learning/ws/WebsocketServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/step/learning/ws/WebsocketController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/ws.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/ws.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Python/PythonGallows/.vs/PythonGallows/FileContentIndex/2bc0e6a0-798e-4ddc-bec0-2b646f132a62.vsidx" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Python/PythonGallows/.vs/PythonGallows/FileContentIndex/read.lock" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Python/PythonGallows/.vs/PythonGallows/v17/.suo" beforeDir="false" />
@@ -9555,7 +9551,7 @@
       <workItem from="1698332736051" duration="6269000" />
       <workItem from="1698405575413" duration="4954000" />
       <workItem from="1698412601792" duration="35000" />
-      <workItem from="1698665693425" duration="3625000" />
+      <workItem from="1698665693425" duration="8145000" />
     </task>
     <servers />
   </component>
