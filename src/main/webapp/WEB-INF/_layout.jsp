@@ -61,7 +61,8 @@
 <!-- Compiled and minified JavaScript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 <script src="<%=context%>/js/site.js"></script>
-<script src="<%=context%>/js/auth.js?<%=time%>"></script>
+<script src="<%=context%>/js/auth.js"></script>
+<script src="<%=context%>/js/ws.js?<%=time%>"></script>
 </body>
 <footer class="page-footer light-blue">
     <div class="container">
