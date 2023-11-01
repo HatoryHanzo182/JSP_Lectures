@@ -4,7 +4,7 @@
     <div class="col s3">
         <ul class="collection" id="chat-container"></ul>
         <input id="chat-input" type="text" value="BLA-BLA-BLA"/>
-        <button type="button" onclick="SendMessageClick()">Send</button>
+        <button class="waves-effect light-blue btn" type="button" onclick="SendMessageClick()">Send</button>
     </div>
     <div class="col s9">
         <p>

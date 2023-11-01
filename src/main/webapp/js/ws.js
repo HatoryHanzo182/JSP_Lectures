@@ -1,6 +1,9 @@
 document.addEventListener('DOMContentLoaded', InitWebsocket);
 
-function SendMessageClick() { window.websocket.send(document.getElementById("chat-input").value); }
+function SendMessageClick()
+{
+    window.websocket.send(JSON.stringify({command: 'chat', data: document.getElementById("chat-input").value}));
+}
 
 function InitWebsocket()
 {
@@ -14,7 +17,10 @@ function InitWebsocket()
     window.websocket = ws;
 }
 
-function OnWsOpen(e) { console.log("OnWsOpen", e); }
+function OnWsOpen(e)
+{
+    window.websocket.send(JSON.stringify({command: 'auth', data: window.localStorage.getItem("token202")}));
+}
 
 function OnWsClose(e) { console.log("OnWsClose", e); }
 
@@ -23,7 +29,10 @@ function OnWsMessage(e)
     const li = document.createElement("li");
 
     li.className = "collection-item";
-    li.appendChild(document.createTextNode(e.data));
+
+    const data = JSON.parse(e.data).data;
+
+    li.appendChild(document.createTextNode(data));
     document.getElementById("chat-container").appendChild(li);
 }
 

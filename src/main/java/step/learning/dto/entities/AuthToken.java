@@ -10,6 +10,7 @@ public class AuthToken
     private String _sub;
     private Date _iat;
     private Date _exp;
+    private String _nik;
 
     public AuthToken()
     {
@@ -22,6 +23,9 @@ public class AuthToken
         this.SetSub(result_set.getString("sub"));
         this.SetIat(new Date(result_set.getTimestamp("iat").getTime()));
         this.SetExp(new Date(result_set.getTimestamp("exp").getTime()));
+
+        try { this._nik = result_set.getString("nik"); }
+        catch(Exception ignored) { }
     }
 
     public void SetJti(String _jti) { this._jti = _jti; }
@@ -33,4 +37,5 @@ public class AuthToken
     public String GetSub() { return _sub; }
     public Date GetIat() { return _iat; }
     public Date GetExp() { return _exp; }
+    public String GetNik() { return _nik; }
 }

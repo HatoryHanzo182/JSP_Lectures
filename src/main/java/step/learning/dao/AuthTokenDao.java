@@ -96,8 +96,9 @@ public class AuthTokenDao
 
     private AuthToken GetActiveTokenForUser(String userId)
     {
-        String sql = "SELECT BIN_TO_UUID(`jti`) AS jti, `sub`, `iat`, `exp` FROM " + _db_prefix +
-                "auth_tokens WHERE `sub` = ? AND `exp` > CURRENT_TIMESTAMP";
+        String sql = "SELECT BIN_TO_UUID(a.`jti`) AS jti, a.`sub`, a.`iat`, a.`exp`, u.`login` AS nik FROM " + _db_prefix +
+                "auth_tokens a JOIN " + _db_prefix + "users u ON a.sub = u.id " +
+                "WHERE a.`jti` = ? AND a.`exp` > CURRENT_TIMESTAMP";
 
         try (PreparedStatement prep = _db_provider.GetConnection().prepareStatement(sql))
         {
@@ -137,7 +138,9 @@ public class AuthTokenDao
         }
         catch(Exception ex) { return null; }
 
-        String sql = "SELECT BIN_TO_UUID(`jti`) AS jti, `sub`, `iat`, `exp` FROM " + _db_prefix + "auth_tokens WHERE `jti` = UUID_TO_BIN(?) AND `exp` > CURRENT_TIMESTAMP";
+        String sql = "SELECT BIN_TO_UUID(a.`jti`) AS jti, a.`sub`, a.`iat`, a.`exp`, u.`login` AS nik FROM " + _db_prefix +
+                "auth_tokens a JOIN " + _db_prefix + "users u ON a.sub = u.id " +
+                "WHERE a.`jti` = UUID_TO_BIN(?) AND a.`exp` > CURRENT_TIMESTAMP";
 
         try(PreparedStatement prep = _db_provider.GetConnection().prepareStatement(sql))
         {

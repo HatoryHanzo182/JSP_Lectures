@@ -1,7 +1,10 @@
 package step.learning.ws;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.google.inject.Inject;
 import step.learning.dao.AuthTokenDao;
+import step.learning.dto.entities.AuthToken;
 
 import javax.websocket.*;
 import javax.websocket.server.ServerEndpoint;
@@ -26,11 +29,18 @@ public class WebsocketController
 
     public static void Broadcast(String message)
     {
-        _sessions.forEach(session ->
-        {
-            try { session.getBasicRemote().sendText(message); }
-            catch (Exception ex) { System.err.println("broadcast: " + ex.getMessage()); }
-        });
+        _sessions.forEach(session -> { SendToSession(session, 201, message); });
+    }
+
+    public static void SendToSession(Session session, int status, String message)
+    {
+        JsonObject response = new JsonObject();
+
+        response.addProperty("status", status);
+        response.addProperty("data", message);
+
+        try { session.getBasicRemote().sendText(response.toString()); }
+        catch (Exception ex) { System.err.println("SendToSession: " + ex.getMessage()); }
     }
 
     private String FormatTimestamp(long timestamp)
@@ -65,10 +75,34 @@ public class WebsocketController
     @OnMessage
     public void onMessage(String message, Session session)
     {
-        long timestamp = System.currentTimeMillis();
-        String message_time = message + " (" + FormatTimestamp(timestamp) + ")";
+        JsonObject request = JsonParser.parseString(message).getAsJsonObject();
+        String command = request.get("command").getAsString();
+        String data = request.get("data").getAsString();
 
-        Broadcast(message_time + session.getUserProperties().get("culture"));
+        switch(command)
+        {
+            case "auth":
+                AuthToken token = _auth_token_dao.GetTokenByBearer(data);
+
+                if(token == null)
+                {
+                    SendToSession(session, 403, "Token rejected");
+                    return;
+                }
+
+                session.getUserProperties().put("nik", token.GetNik());
+
+                SendToSession(session, 202, token.GetNik());
+                break;
+            case "chat":
+                long timestamp = System.currentTimeMillis();
+                String message_time = message + " (" + FormatTimestamp(timestamp) + ")";
+
+                Broadcast(session.getUserProperties().get("nik") + ": " + data);
+                break;
+            default:
+                SendToSession(session, 405, "Command unrecognized");
+        }
     }
 
     @OnError
