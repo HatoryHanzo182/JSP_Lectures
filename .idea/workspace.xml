@@ -9297,11 +9297,7 @@
       <change beforePath="$PROJECT_DIR$/../../JS/СlassApplication/Webpack/src/statistics.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../JS/СlassApplication/Webpack/webpack.config.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/step/learning/dao/AuthTokenDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/step/learning/dao/AuthTokenDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/step/learning/dto/entities/AuthToken.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/step/learning/dto/entities/AuthToken.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/step/learning/ws/WebsocketController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/step/learning/ws/WebsocketController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/ws.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/ws.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/js/ws.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/js/ws.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Python/PythonGallows/.vs/PythonGallows/FileContentIndex/2bc0e6a0-798e-4ddc-bec0-2b646f132a62.vsidx" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Python/PythonGallows/.vs/PythonGallows/FileContentIndex/read.lock" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Python/PythonGallows/.vs/PythonGallows/v17/.suo" beforeDir="false" />
@@ -9559,6 +9555,7 @@
       <workItem from="1698696871703" duration="2000" />
       <workItem from="1698776689012" duration="6238000" />
       <workItem from="1698833002581" duration="13548000" />
+      <workItem from="1698867161396" duration="390000" />
     </task>
     <servers />
   </component>

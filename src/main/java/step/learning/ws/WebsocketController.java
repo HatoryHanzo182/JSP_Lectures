@@ -5,7 +5,6 @@ import com.google.gson.JsonParser;
 import com.google.inject.Inject;
 import step.learning.dao.AuthTokenDao;
 import step.learning.dto.entities.AuthToken;
-
 import javax.websocket.*;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
@@ -29,7 +28,16 @@ public class WebsocketController
 
     public static void Broadcast(String message)
     {
-        _sessions.forEach(session -> { SendToSession(session, 201, message); });
+        JsonObject response = new JsonObject();
+        response.addProperty("status", 201);
+        response.addProperty("data", message);
+
+        _sessions.forEach(session ->
+        {
+            try { session.getBasicRemote().sendText(response.toString()); }
+            catch (Exception ex) { System.err.println("SendToSession: " + ex.getMessage()); }
+        });
+        // _sessions.forEach(session -> { SendToSession(session, 201, message); });
     }
 
     public static void SendToSession(Session session, int status, String message)
@@ -66,7 +74,6 @@ public class WebsocketController
             session.getUserProperties().put("culture", culture);
             _sessions.add(session);
         }
-
     }
 
     @OnClose
@@ -107,6 +114,4 @@ public class WebsocketController
 
     @OnError
     public void onError(Throwable ex, Session session) { System.err.println("broadcast: " + ex.getMessage()); }
-
-
 }
