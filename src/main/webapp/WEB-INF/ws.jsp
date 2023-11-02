@@ -1,10 +1,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <h1>WEBSOCKET</h1>
 <div class="row">
-    <div class="col s3">
+    <div class="col s3" id="chat-block">
         <ul class="collection" id="chat-container"></ul>
+        <b id="chat-nik">wait...</b>
         <input id="chat-input" type="text" value="BLA-BLA-BLA"/>
-        <button class="waves-effect light-blue btn" type="button" onclick="SendMessageClick()">Send</button>
+        <button id="chat-send" disabled class="waves-effect light-blue btn" type="button" onclick="SendMessageClick()">Send</button>
     </div>
     <div class="col s9">
         <p>
@@ -25,7 +26,8 @@
         <br>
         <h2>Конфигурация.</h2>
         <p>
-
+            Во-первых, инжекция. Поскольку сервер отдельный, его запросы не проходят
+            фильтры и, соответственно, Guice инжектор.
         </p>
     </div>
 </div>

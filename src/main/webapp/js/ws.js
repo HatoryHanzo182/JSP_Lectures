@@ -62,6 +62,26 @@ function AppendChatMessage(message)
     document.getElementById("chat-container").appendChild(li);
 }
 
-function EnableChat(nik) { document.getElementById("chat-input").disabled = false; }
+function EnableChat(nik)
+{
+    document.getElementById("chat-nik").innerText = nik;
 
-function DisableChat() { document.getElementById("chat-input").disabled = true; }
+    for(let child of document.getElementById("chat-block").children)
+        child.disabled = false;
+
+    // document.getElementById("chat-input").disabled = false;
+    // document.getElementById("chat-send").disabled = false;
+
+    AppendChatMessage(nik + ' join us');
+}
+
+function DisableChat()
+{
+    document.getElementById("chat-nik").innerText = 'OFF';
+
+    for(let child of document.getElementById("chat-block").children)
+        child.disabled = true;
+
+    // document.getElementById("chat-input").disabled = true;
+    // document.getElementById("chat-send").disabled = true;
+}
