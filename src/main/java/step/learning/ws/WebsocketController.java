@@ -4,7 +4,10 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.inject.Inject;
 import step.learning.dao.AuthTokenDao;
+import step.learning.dao.ChatDao;
 import step.learning.dto.entities.AuthToken;
+import step.learning.dto.entities.ChatMessage;
+
 import javax.websocket.*;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
@@ -19,11 +22,13 @@ public class WebsocketController
 {
     private static final Set<Session> _sessions = Collections.synchronizedSet(new HashSet<>());
     private final AuthTokenDao _auth_token_dao;
+    private final ChatDao _chat_dao;
 
     @Inject
-    public WebsocketController(AuthTokenDao auth_token_dao)
+    public WebsocketController(AuthTokenDao auth_token_dao, ChatDao chat_dao)
     {
         _auth_token_dao = auth_token_dao;
+        _chat_dao = chat_dao;
     }
 
     public static void Broadcast(String message)
@@ -62,6 +67,8 @@ public class WebsocketController
     @OnOpen
     public void onOpen(Session session, EndpointConfig sec)
     {
+        _chat_dao.Install();
+
         String culture = (String)sec.getUserProperties().get("culture");
 
         if(culture == null)
@@ -89,24 +96,30 @@ public class WebsocketController
         switch(command)
         {
             case "auth":
+            {
                 AuthToken token = _auth_token_dao.GetTokenByBearer(data);
 
-                if(token == null)
-                {
+                if (token == null) {
                     SendToSession(session, 403, "Token rejected");
                     return;
                 }
 
-                session.getUserProperties().put("nik", token.GetNik());
+                session.getUserProperties().put("token", token);
 
                 SendToSession(session, 202, token.GetNik());
                 break;
+            }
             case "chat":
+            {
+                AuthToken token = (AuthToken) session.getUserProperties().get("token");
+                ChatMessage chat_message = new ChatMessage(token.GetSub(), data);
                 long timestamp = System.currentTimeMillis();
                 String message_time = message + " (" + FormatTimestamp(timestamp) + ")";
 
-                Broadcast(session.getUserProperties().get("nik") + ": " + data);
+                _chat_dao.Add(chat_message);
+                Broadcast(token.GetNik() + ": " + data);
                 break;
+            }
             default:
                 SendToSession(session, 405, "Command unrecognized");
         }

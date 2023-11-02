@@ -26,14 +26,23 @@ function OnWsClose(e) { console.log("OnWsClose", e); }
 
 function OnWsMessage(e)
 {
-    const li = document.createElement("li");
+    const chat_message = JSON.parse(e.data);
 
-    li.className = "collection-item";
-
-    const data = JSON.parse(e.data).data;
-
-    li.appendChild(document.createTextNode(data));
-    document.getElementById("chat-container").appendChild(li);
+    switch(chat_message.status)
+    {
+        case 201:
+            AppendChatMessage(chat_message.data);
+            break;
+        case 202:
+            EnableChat(chat_message.data);
+            break;
+        case 403:
+            DisableChat();
+            break;
+        case 405:
+            console.error(chat_message);
+            break;
+    }
 }
 
 function OnWsError(e) { console.log("OnWsError", e); }
@@ -43,3 +52,16 @@ function GetAppContext()
     var is_context_preset = false;
     return is_context_preset ? "" : "/" + window.location.pathname.split('/')[1];
 }
+
+function AppendChatMessage(message)
+{
+    const li = document.createElement("li");
+
+    li.className = "collection-item";
+    li.appendChild(document.createTextNode(message));
+    document.getElementById("chat-container").appendChild(li);
+}
+
+function EnableChat(nik) { document.getElementById("chat-input").disabled = false; }
+
+function DisableChat() { document.getElementById("chat-input").disabled = true; }

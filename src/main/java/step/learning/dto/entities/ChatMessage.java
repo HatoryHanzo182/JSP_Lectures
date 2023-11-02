@@ -24,6 +24,12 @@ public class ChatMessage
         SetMoment(new Date(result_set.getTimestamp("moment").getTime()));
     }
 
+    public ChatMessage(String sender_id, String message)
+    {
+        SetSenderId(sender_id);
+        SetMessage(message);
+    }
+
     public void SetId(String id) { this._id = id; }
     public void SetSenderId(String sender_id) { this._sender_id = sender_id; }
     public void SetMessage(String message) { this._message = message; }
