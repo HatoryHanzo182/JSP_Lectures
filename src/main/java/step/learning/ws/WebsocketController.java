@@ -12,10 +12,7 @@ import javax.websocket.*;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.Collections;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @ServerEndpoint(value = "/chat", configurator = WebsocketConfigurator.class)
 public class WebsocketController
@@ -69,9 +66,9 @@ public class WebsocketController
     {
         _chat_dao.Install();
 
-        String culture = (String)sec.getUserProperties().get("culture");
+        String culture = (String) sec.getUserProperties().get("culture");
 
-        if(culture == null)
+        if (culture == null)
         {
             try { session.close(); }
             catch (IOException ignored) { }
@@ -79,6 +76,12 @@ public class WebsocketController
         else
         {
             session.getUserProperties().put("culture", culture);
+
+            List<ChatMessage> lastMessages = _chat_dao.GetLastMessages(10);
+
+            for (ChatMessage message : lastMessages)
+                SendToSession(session, 201, message.GetMessage());
+
             _sessions.add(session);
         }
     }
@@ -114,10 +117,10 @@ public class WebsocketController
                 AuthToken token = (AuthToken) session.getUserProperties().get("token");
                 ChatMessage chat_message = new ChatMessage(token.GetSub(), data);
                 long timestamp = System.currentTimeMillis();
-                String message_time = message + " (" + FormatTimestamp(timestamp) + ")";
+                String message_time = token.GetNik() + ": " + data + "  (" + FormatTimestamp(timestamp) + ")";
 
                 _chat_dao.Add(chat_message);
-                Broadcast(token.GetNik() + ": " + data);
+                Broadcast(message_time);
                 break;
             }
             default:

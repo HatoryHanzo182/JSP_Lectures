@@ -5,11 +5,11 @@ import com.google.inject.name.Named;
 import step.learning.dto.entities.ChatMessage;
 import step.learning.services.db.IDbProvider;
 
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.sql.Timestamp;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -68,4 +68,32 @@ public class ChatDao extends DaoBase
             return false;
         }
     }
+
+    public List<ChatMessage> GetLastMessages(int count)
+    {
+        List<ChatMessage> last_messages = new ArrayList<>();
+
+        String sql = "SELECT sender_id, message FROM " + _db_prefix + "chat_messages ORDER BY moment DESC LIMIT ?";
+
+        try (PreparedStatement prep = _db_provider.GetConnection().prepareStatement(sql))
+        {
+            prep.setInt(1, count);
+
+            try (ResultSet result_set = prep.executeQuery())
+            {
+                while (result_set.next())
+                {
+                    String sender_id = result_set.getString("sender_id");
+                    String message = result_set.getString("message");
+
+                    last_messages.add(new ChatMessage(sender_id, message));
+                }
+            }
+        }
+        catch (SQLException ex) { _logger.log(Level.WARNING, ex.getMessage() + "---" + sql); }
+
+        Collections.reverse(last_messages);
+        return last_messages;
+    }
+
 }
