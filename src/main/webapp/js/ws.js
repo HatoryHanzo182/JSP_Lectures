@@ -7,6 +7,11 @@ function SendMessageClick()
 
 function InitWebsocket()
 {
+    const token = JSON.parse(atob(window.localStorage.getItem('token202')));
+    const exp = new Date(token._exp);
+
+    document.getElementById("chat-token").innerText = "Active until " + DateString(exp)
+
     const host = window.location.host + GetAppContext();
     const ws = new WebSocket(`ws://${host}/chat`);
 
@@ -84,4 +89,11 @@ function DisableChat()
 
     // document.getElementById("chat-input").disabled = true;
     // document.getElementById("chat-send").disabled = true;
+}
+
+function DateString(date)
+{
+    if(date.getDate() === new Date().getDate())
+        return `${('0' + date.getHours()).slice(-2)}:${('0' + date.getMinutes()).slice(-2)}`;
+    return `${('0' + date.getDate()).slice(-2)}.${('0' + (date.getMonth() + 1)).slice(-2)}.${date.getFullYear()} ${('0' + date.getHours()).slice(-2)}:${('0' + date.getMinutes()).slice(-2)}`;
 }

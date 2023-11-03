@@ -77,7 +77,7 @@ public class WebsocketController
         {
             session.getUserProperties().put("culture", culture);
 
-            List<ChatMessage> lastMessages = _chat_dao.GetLastMessages(10);
+            List<ChatMessage> lastMessages = _chat_dao.GetLastMessages(5);
 
             for (ChatMessage message : lastMessages)
                 SendToSession(session, 201, message.GetMessage());
@@ -120,7 +120,10 @@ public class WebsocketController
                 String message_time = token.GetNik() + ": " + data + "  (" + FormatTimestamp(timestamp) + ")";
 
                 _chat_dao.Add(chat_message);
+
                 Broadcast(message_time);
+
+                _auth_token_dao.RenewToken(token);
                 break;
             }
             default:

@@ -4,6 +4,7 @@
     <div class="col s3" id="chat-block">
         <ul class="collection" id="chat-container"></ul>
         <b id="chat-nik">wait...</b>
+        <span style="font-size: x-small; color: gray" id="chat-token"></span>
         <input id="chat-input" type="text" value="BLA-BLA-BLA"/>
         <button id="chat-send" disabled class="waves-effect light-blue btn" type="button" onclick="SendMessageClick()">Send</button>
     </div>

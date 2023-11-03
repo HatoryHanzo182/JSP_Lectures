@@ -144,4 +144,18 @@ public class AuthTokenDao extends DaoBase
 
         return null;
     }
+
+    public void RenewToken(AuthToken token)
+    {
+        String sql = "UPDATE " + _db_prefix + "auth_tokens SET `exp` = DATE_ADD(CURRENT_TIMESTAMP, INTERVAL 12 HOUR) WHERE `jti` = UUID_TO_BIN(?)";
+
+        try(PreparedStatement prep = _db_provider.GetConnection().prepareStatement(sql))
+        {
+            prep.setString(1, token.GetJti());
+            prep.executeUpdate();
+            //token.SetExp();
+            //token.setExp(new Date(token.getExp().getTime() + 1000L * 60 * 60 * 12));
+        }
+        catch(Exception e) { _logger.log(Level.WARNING, e.getMessage() + " -- " + sql); }
+    }
 }
