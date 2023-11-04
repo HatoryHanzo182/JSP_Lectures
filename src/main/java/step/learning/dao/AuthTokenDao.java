@@ -153,8 +153,9 @@ public class AuthTokenDao extends DaoBase
         {
             prep.setString(1, token.GetJti());
             prep.executeUpdate();
-            //token.SetExp();
-            //token.setExp(new Date(token.getExp().getTime() + 1000L * 60 * 60 * 12));
+
+            Date new_exp = new Date(token.GetExp().getTime() + 1000L * 60 * 60 * 12);
+            token.SetExp(new_exp);
         }
         catch(Exception e) { _logger.log(Level.WARNING, e.getMessage() + " -- " + sql); }
     }
