@@ -1,5 +1,7 @@
 package step.learning.dto.entities;
 
+import com.google.gson.JsonObject;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
@@ -39,4 +41,16 @@ public class ChatMessage
     public String GetSenderId() { return _sender_id; }
     public String GetMessage() { return _message; }
     public Date GetMoment() { return _moment; }
+
+    public JsonObject ToJsonObject()
+    {
+        JsonObject result = new JsonObject();
+
+        result.addProperty("id", _id);
+        result.addProperty("sender_id", _sender_id);
+        result.addProperty("message", _message);
+        result.addProperty("moment", _moment.toString());
+
+        return result;
+    }
 }

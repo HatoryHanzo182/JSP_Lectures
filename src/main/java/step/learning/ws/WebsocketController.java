@@ -1,5 +1,6 @@
 package step.learning.ws;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.inject.Inject;
@@ -50,6 +51,12 @@ public class WebsocketController
         response.addProperty("data", message);
 
         try { session.getBasicRemote().sendText(response.toString()); }
+        catch (Exception ex) { System.err.println("SendToSession: " + ex.getMessage()); }
+    }
+
+    public static void SendToSession(Session session, JsonObject jsonObject)
+    {
+        try { session.getBasicRemote().sendText(jsonObject.toString()); }
         catch (Exception ex) { System.err.println("SendToSession: " + ex.getMessage()); }
     }
 
@@ -125,6 +132,28 @@ public class WebsocketController
 
                 _auth_token_dao.RenewToken(token);
                 break;
+            }
+            case "load":
+            {
+                AuthToken token = (AuthToken) session.getUserProperties().get("token");
+
+                if(token != null)
+                {
+                    JsonObject response = new JsonObject();
+                    JsonArray array = new JsonArray();
+
+                    for(ChatMessage msg : _chat_dao.GetLastMessages(5))
+                        array.add(msg.ToJsonObject());
+
+                    response.addProperty("status", 200);
+                    response.add("data", array);
+
+                    SendToSession(session, response);
+                }
+                else
+                {
+                    SendToSession(session, 403, "Token rejected.");
+                }
             }
             default:
                 SendToSession(session, 405, "Command unrecognized");

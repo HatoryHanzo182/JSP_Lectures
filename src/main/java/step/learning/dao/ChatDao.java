@@ -69,6 +69,8 @@ public class ChatDao extends DaoBase
         }
     }
 
+    public List<ChatMessage> GetLastMessages() { return GetLastMessages(10); }
+
     public List<ChatMessage> GetLastMessages(int count)
     {
         List<ChatMessage> last_messages = new ArrayList<>();
@@ -95,5 +97,4 @@ public class ChatDao extends DaoBase
         Collections.reverse(last_messages);
         return last_messages;
     }
-
 }

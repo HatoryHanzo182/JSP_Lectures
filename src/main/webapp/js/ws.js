@@ -35,11 +35,15 @@ function OnWsMessage(e)
 
     switch(chat_message.status)
     {
+        case 200:
+            LoadChatMessage(chat_message.data);
+            break;
         case 201:
             AppendChatMessage(chat_message.data);
             break;
         case 202:
             EnableChat(chat_message.data);
+            WsSend("load", "")
             break;
         case 403:
             DisableChat();
@@ -56,6 +60,16 @@ function GetAppContext()
 {
     var is_context_preset = false;
     return is_context_preset ? "" : "/" + window.location.pathname.split('/')[1];
+}
+
+function WsSend(command, data)
+{
+    window.websocket.send(JSON.stringify({command: command, data: data}));
+}
+
+function LoadChatMessage(arr)
+{
+    console.log(arr);
 }
 
 function AppendChatMessage(message)
