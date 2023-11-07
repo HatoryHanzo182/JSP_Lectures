@@ -71,30 +71,29 @@ public class ChatDao extends DaoBase
 
     public List<ChatMessage> GetLastMessages() { return GetLastMessages(10); }
 
-    public List<ChatMessage> GetLastMessages(int count)
-    {
+    public List<ChatMessage> GetLastMessages(int count) {
         List<ChatMessage> last_messages = new ArrayList<>();
 
-        String sql = "SELECT sender_id, message FROM " + _db_prefix + "chat_messages ORDER BY moment DESC LIMIT ?";
+        String sql = "SELECT sender_id, message, moment FROM " + _db_prefix + "chat_messages ORDER BY moment DESC LIMIT ?";
 
-        try (PreparedStatement prep = _db_provider.GetConnection().prepareStatement(sql))
-        {
+        try (PreparedStatement prep = _db_provider.GetConnection().prepareStatement(sql)) {
             prep.setInt(1, count);
 
-            try (ResultSet result_set = prep.executeQuery())
-            {
-                while (result_set.next())
-                {
+            try (ResultSet result_set = prep.executeQuery()) {
+                while (result_set.next()) {
                     String sender_id = result_set.getString("sender_id");
                     String message = result_set.getString("message");
+                    Date moment = result_set.getTimestamp("moment");
 
-                    last_messages.add(new ChatMessage(sender_id, message));
+                    last_messages.add(new ChatMessage(sender_id, message, moment));
                 }
             }
+        } catch (SQLException ex) {
+            _logger.log(Level.WARNING, ex.getMessage() + "---" + sql);
         }
-        catch (SQLException ex) { _logger.log(Level.WARNING, ex.getMessage() + "---" + sql); }
 
         Collections.reverse(last_messages);
         return last_messages;
     }
+
 }

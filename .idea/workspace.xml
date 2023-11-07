@@ -9297,6 +9297,9 @@
       <change beforePath="$PROJECT_DIR$/../../JS/СlassApplication/Webpack/src/statistics.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../JS/СlassApplication/Webpack/webpack.config.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/step/learning/dao/ChatDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/step/learning/dao/ChatDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/step/learning/dto/entities/ChatMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/step/learning/dto/entities/ChatMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/step/learning/ws/WebsocketController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/step/learning/ws/WebsocketController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Python/PythonGallows/.vs/PythonGallows/FileContentIndex/2bc0e6a0-798e-4ddc-bec0-2b646f132a62.vsidx" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Python/PythonGallows/.vs/PythonGallows/FileContentIndex/read.lock" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Python/PythonGallows/.vs/PythonGallows/v17/.suo" beforeDir="false" />
@@ -9565,7 +9568,8 @@
       <workItem from="1699006520145" duration="38000" />
       <workItem from="1699006608113" duration="3705000" />
       <workItem from="1699134285030" duration="1116000" />
-      <workItem from="1699270402110" duration="5469000" />
+      <workItem from="1699270402110" duration="5523000" />
+      <workItem from="1699375817861" duration="1081000" />
     </task>
     <servers />
   </component>

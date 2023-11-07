@@ -87,7 +87,11 @@ public class WebsocketController
             List<ChatMessage> lastMessages = _chat_dao.GetLastMessages(5);
 
             for (ChatMessage message : lastMessages)
-                SendToSession(session, 201, message.GetMessage());
+            {
+                String formatted_message = message.GetMessage() + " (" + FormatTimestamp(message.GetMoment().getTime()) + ")";
+
+                SendToSession(session, 201, formatted_message);
+            }
 
             _sessions.add(session);
         }
