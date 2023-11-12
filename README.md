@@ -19,18 +19,6 @@ This repository is designed to teach and share knowledge about JavaServer Pages 
 3. **Resources:**
      - `additional-resources/` - contains useful articles, links, and other resources for additional study. This may include optimization tips, best practices, and recommendations from the community.
 
-## How to use this repository
-
-- **Beginners:** Start with the `basic-examples/` section to dive into the basics of JSP. Move on to `advanced-examples/` when you're ready for more advanced topics.
-
-- **Students and teachers:** Use lectures from `lecture-slides/` and additional materials from `lecture-notes/` for your educational purposes.
-
-- **Community Contributions:** If you have your own code examples, lectures, or additional resources, feel free to submit your changes via pull requests. We appreciate your contributions!
-
-## How to contribute
-
-We welcome your ideas and contributions to improve this repository. You can make changes via pull requests, add new code examples, or improve existing lectures.
-
 ## License
 
 This project is licensed under the [MIT License](LICENSE). Please read the license before using or contributing to the project.
