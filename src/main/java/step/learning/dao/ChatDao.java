@@ -95,5 +95,4 @@ public class ChatDao extends DaoBase
         Collections.reverse(last_messages);
         return last_messages;
     }
-
 }

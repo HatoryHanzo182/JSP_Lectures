@@ -10,6 +10,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7c9d6bd6-e772-4b96-b4b4-0ad7718f73ea" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../FatToad/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../FatToad/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../FatToad/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../FatToad/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../FatToad/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../FatToad/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../FatToad/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../.gitattributes" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../.gitignore" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../JS/СlassApplication/Webpack/node_modules/caniuse-lite/LICENSE" beforeDir="false" />
@@ -9298,8 +9305,6 @@
       <change beforePath="$PROJECT_DIR$/../../JS/СlassApplication/Webpack/webpack.config.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/step/learning/dao/ChatDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/step/learning/dao/ChatDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/step/learning/dto/entities/ChatMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/step/learning/dto/entities/ChatMessage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/step/learning/ws/WebsocketController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/step/learning/ws/WebsocketController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Python/PythonGallows/.vs/PythonGallows/FileContentIndex/2bc0e6a0-798e-4ddc-bec0-2b646f132a62.vsidx" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Python/PythonGallows/.vs/PythonGallows/FileContentIndex/read.lock" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Python/PythonGallows/.vs/PythonGallows/v17/.suo" beforeDir="false" />
@@ -9386,7 +9391,7 @@
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/My resources/Work/Java/JavaWebLectures/target/classes/tpl&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/My resources/Work/Java/FatToad&quot;,
     &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -9570,6 +9575,14 @@
       <workItem from="1699134285030" duration="1116000" />
       <workItem from="1699270402110" duration="5523000" />
       <workItem from="1699375817861" duration="1081000" />
+      <workItem from="1699377168365" duration="36000" />
+      <workItem from="1699438329594" duration="1443000" />
+      <workItem from="1699455830243" duration="3000" />
+      <workItem from="1699455871024" duration="4000" />
+      <workItem from="1699455947882" duration="3000" />
+      <workItem from="1699456120787" duration="24000" />
+      <workItem from="1699456224177" duration="13000" />
+      <workItem from="1699457036940" duration="21000" />
     </task>
     <servers />
   </component>
